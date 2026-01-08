@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Management Principles - Super Visual Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.1);
+            --shadow-hover: rgba(0, 217, 165, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #2D2D2D;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.2);
+            --shadow-hover: rgba(0, 217, 165, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            width: 100%;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--bg-primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            background: var(--gradient);
+            color: white;
+            animation: fadeInDown 1s ease;
+            margin: 0 -15px 20px -15px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 0 5px;
+        }
+
+        .nav-btn {
+            background: var(--bg-primary);
+            color: var(--primary);
+            padding: 10px 18px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            margin: 20px 0;
+            padding: clamp(20px, 4vw, 40px);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px var(--shadow);
+            display: none;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            margin: 25px 0 15px 0;
+        }
+
+        .section h4 {
+            color: var(--accent);
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            margin: 18px 0 10px 0;
+        }
+
+        /* Visual Memory Boxes */
+        .memory-box {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            border: 3px solid #FFA500;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: bold;
+            color: #8B4513;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        [data-theme="dark"] .memory-box {
+            background: linear-gradient(135deg, #4A4A2A 0%, #6B6B3A 100%);
+            color: #FFD700;
+            border-color: #FFA500;
+        }
+
+        /* Visual Flowchart */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+        }
+
+        .flow-box {
+            background: var(--gradient);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            min-width: 200px;
+            max-width: 100%;
+            box-shadow: 0 4px 12px var(--shadow);
+            position: relative;
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Visual Comparison Cards */
+        .visual-compare {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .compare-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .compare-card:hover {
+            transform: scale(1.05);
+        }
+
+        .compare-card.high {
+            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
+            color: white;
+        }
+
+        .compare-card.low {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            color: white;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .icon-item {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .icon-item .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Visual Timeline */
+        .visual-timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 30px 0;
+        }
+
+        .visual-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+        }
+
+        .timeline-step {
+            position: relative;
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-left: 80px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .timeline-step::before {
+            content: attr(data-number);
+            position: absolute;
+            left: -65px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Visual Card */
+        .visual-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px var(--shadow-hover);
+        }
+
+        /* Dimension Visual Cards */
+        .dimension-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .dim-card {
+            background: var(--gradient);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dim-card::before {
+            content: attr(data-icon);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .dim-card:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+        }
+
+        .dim-card h4 {
+            color: white;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 15px;
+        }
+
+        /* Visual Bar Chart */
+        .visual-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: auto;
+            min-height: 200px;
+            margin: 30px 0;
+            gap: 15px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            flex-wrap: wrap;
+        }
+
+        .visual-bar {
+            flex: 1;
+            min-width: 70px;
+            max-width: 150px;
+            background: var(--gradient);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+        }
+
+        .visual-bar:hover {
+            transform: scaleY(1.1);
+            opacity: 0.9;
+        }
+
+        /* Mnemonic Box */
+        .mnemonic {
+            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
+            border: 3px dashed #FF6B9D;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            font-weight: bold;
+            color: #8B008B;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        [data-theme="dark"] .mnemonic {
+            background: linear-gradient(135deg, #4A2A4A 0%, #6B3A6B 100%);
+            color: #FFB6C1;
+            border-color: #FF6B9D;
+        }
+
+        /* Visual Story Box */
+        .story-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #D4F1F4 100%);
+            border-left: 5px solid var(--primary);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        [data-theme="dark"] .story-box {
+            background: linear-gradient(135deg, #2A4A3A 0%, #3A5A5A 100%);
+        }
+
+        /* Progress Indicator */
+        .progress-visual {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 30px;
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 15px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Visual Connection Lines */
+        .connection-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .connection-item {
+            background: var(--gradient);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            box-shadow: 0 4px 12px var(--shadow);
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .connection-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Simple Text Styles */
+        .big-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .simple-text {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .emoji-big {
+            font-size: 4rem;
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Exam Tip Visual */
+        .exam-visual {
+            background: var(--gradient);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid white;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .exam-visual h4 {
+            color: white;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .visual-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-step {
+                margin-left: 60px;
+            }
+
+            .timeline-step::before {
+                left: -45px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .dimension-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-compare {
+                grid-template-columns: 1fr;
+            }
+
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+    </button>
+
+    <header>
+        <h1>📚 Management Principles</h1>
+        <p>Super Visual Guide - Made for Easy Learning!</p>
+    </header>
+
+    <div class="container">
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="showSection('hofstede')">🌍 Hofstede</button>
+            <button class="nav-btn" onclick="showSection('planning')">📋 Planning</button>
+            <button class="nav-btn" onclick="showSection('organizing')">🏢 Organizing</button>
+            <button class="nav-btn" onclick="showSection('leadership')">👔 Leadership</button>
+            <button class="nav-btn" onclick="showSection('controlling')">✅ Controlling</button>
+            <button class="nav-btn" onclick="showSection('exam')">📝 Exam Tips</button>
+        </nav>
+
+        <!-- Hofstede Section -->
+        <section id="hofstede" class="section active">
+            <h2>🌍 Hofstede's 6 Cultural Dimensions</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICK: "PIMUTI" - Power, Individualism, Masculinity, Uncertainty, Time, Indulgence
+            </div>
+
+            <div class="big-text">Think of it like 6 different lenses to see cultures! 👓</div>
+
+            <div class="dimension-visual">
+                <div class="dim-card" data-icon="👑">
+                    <h4>1. Power Distance 👑</h4>
+                    <p><strong>High = Boss is King</strong> 👑</p>
+                    <p>China, Saudi Arabia</p>
+                    <p><strong>Low = Everyone Equal</strong> 🤝</p>
+                    <p>Sweden, Denmark</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Management:</strong><br>
+                        High = Strict boss 👔<br>
+                        Low = Friendly boss 😊
+                    </div>
+                </div>
+
+                <div class="dim-card" data-icon="👤">
+                    <h4>2. Individualism vs Collectivism 👤👥</h4>
+                    <p><strong>Individualism = "ME"</strong> 👤</p>
+                    <p>USA, Australia</p>
+                    <p><strong>Collectivism = "WE"</strong> 👥</p>
+                    <p>Japan, China</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Reward:</strong><br>
+                        Individual = Personal prize 🏆<br>
+                        Collective = Team prize 🎉
+                    </div>
+                </div>
+
+                <div class="dim-card" data-icon="💪">
+                    <h4>3. Masculinity vs Femininity 💪💝</h4>
+                    <p><strong>Masculine = Competition</strong> 💪</p>
+                    <p>Japan, Germany</p>
+                    <p><strong>Feminine = Care</strong> 💝</p>
+                    <p>Norway, Sweden</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Focus:</strong><br>
+                        Masculine = Win! 🏆<br>
+                        Feminine = Balance ⚖️
+                    </div>
+                </div>
+
+                <div class="dim-card" data-icon="⚠️">
+                    <h4>4. Uncertainty Avoidance ⚠️</h4>
+                    <p><strong>High = Many Rules</strong> 📋</p>
+                    <p>Chile, Peru</p>
+                    <p><strong>Low = Flexible</strong> 🔄</p>
+                    <p>Singapore, Jamaica</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Management:</strong><br>
+                        High = Strict rules 📜<br>
+                        Low = Try new things 🚀
+                    </div>
+                </div>
+
+                <div class="dim-card" data-icon="⏰">
+                    <h4>5. Time Orientation ⏰</h4>
+                    <p><strong>Short-term = Now!</strong> ⚡</p>
+                    <p>Morocco, Philippines</p>
+                    <p><strong>Long-term = Future</strong> 🔮</p>
+                    <p>China, Japan</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Focus:</strong><br>
+                        Short = Quick results ⚡<br>
+                        Long = Patient planning 🎯
+                    </div>
+                </div>
+
+                <div class="dim-card" data-icon="🎉">
+                    <h4>6. Indulgence vs Restraint 🎉🚫</h4>
+                    <p><strong>Indulgence = Fun!</strong> 🎉</p>
+                    <p>Mexico, Brazil</p>
+                    <p><strong>Restraint = Control</strong> 🚫</p>
+                    <p>Egypt, Pakistan</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                        <strong>Culture:</strong><br>
+                        Indulgent = Free & fun 🎊<br>
+                        Restrained = Disciplined 📏
+                    </div>
+                </div>
+            </div>
+
+            <div class="mnemonic">
+                💡 WHY IT MATTERS: Helps you understand why people from different countries act differently at work!
+            </div>
+
+            <div class="visual-bars">
+                <div class="visual-bar" style="height: 90%;">
+                    <div>Understand Behavior</div>
+                </div>
+                <div class="visual-bar" style="height: 85%;">
+                    <div>Global Teams</div>
+                </div>
+                <div class="visual-bar" style="height: 80%;">
+                    <div>Less Fights</div>
+                </div>
+                <div class="visual-bar" style="height: 95%;">
+                    <div>Choose Leader</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Planning Section -->
+        <section id="planning" class="section">
+            <h2>📋 Planning - The Roadmap! 🗺️</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICK: Planning = "What + How + When" = Roadmap to Success! 🗺️
+            </div>
+
+            <div class="flowchart">
+                <div class="flow-box">🎯 Set Goals</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">📝 Make Plan</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">⏰ Do It</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">✅ Check Results</div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">📝</div>
+                    <h4>Formal Planning</h4>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>✅ Written down</li>
+                        <li>✅ Long-term</li>
+                        <li>✅ Big companies</li>
+                        <li>✅ Official</li>
+                    </ul>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">💭</div>
+                    <h4>Informal Planning</h4>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>❌ Not written</li>
+                        <li>❌ Short-term</li>
+                        <li>❌ Small places</li>
+                        <li>❌ Just thoughts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <h3>📖 Simple Story:</h3>
+                <p><strong>Imagine you want to build a house:</strong></p>
+                <p>🏠 <strong>Goal:</strong> Build a house</p>
+                <p>📋 <strong>Plan:</strong> Get materials, hire workers, build step by step</p>
+                <p>⏰ <strong>When:</strong> Start Monday, finish in 3 months</p>
+                <p>✅ <strong>Check:</strong> Is it done? Does it look good?</p>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
+                    That's planning! Simple! 😊
+                </p>
+            </div>
+
+            <div class="visual-timeline">
+                <div class="timeline-step" data-number="1">
+                    <h4>🎯 Step 1: Set Goals</h4>
+                    <p>What do you want? (Like: "I want to sell 1000 products")</p>
+                </div>
+                <div class="timeline-step" data-number="2">
+                    <h4>📝 Step 2: Make Plan</h4>
+                    <p>How will you do it? (Like: "Advertise, hire sales team, open store")</p>
+                </div>
+                <div class="timeline-step" data-number="3">
+                    <h4>⏰ Step 3: Set Time</h4>
+                    <p>When will you do it? (Like: "Start next month, finish in 6 months")</p>
+                </div>
+                <div class="timeline-step" data-number="4">
+                    <h4>✅ Step 4: Check</h4>
+                    <p>Did it work? (Like: "Did we sell 1000? Yes or No?")</p>
+                </div>
+            </div>
+
+            <div class="exam-visual">
+                <h4>🎯 MBO (Management by Objectives)</h4>
+                <div class="connection-box">
+                    <div class="connection-item">Boss + Employee</div>
+                    <div class="connection-arrow">↓</div>
+                    <div class="connection-item">Set Goals Together</div>
+                    <div class="connection-arrow">↓</div>
+                    <div class="connection-item">Check Progress</div>
+                    <div class="connection-arrow">↓</div>
+                    <div class="connection-item">Reward if Good! 🎁</div>
+                </div>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">🎯</span>
+                    <div><strong>Clear</strong></div>
+                    <div>Everyone understands</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📏</span>
+                    <div><strong>Measurable</strong></div>
+                    <div>Can count it</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">⏰</span>
+                    <div><strong>Time-bound</strong></div>
+                    <div>Has deadline</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">✅</span>
+                    <div><strong>Achievable</strong></div>
+                    <div>Can actually do it</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organizing Section -->
+        <section id="organizing" class="section">
+            <h2>🏢 Organizing - Who Does What? 👥</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICK: Organizing = "Who does what + Who reports to whom" = Building a Team! 👥
+            </div>
+
+            <div class="story-box">
+                <h3>📖 Simple Story:</h3>
+                <p><strong>Imagine a restaurant:</strong></p>
+                <p>👨‍🍳 <strong>Chef</strong> = Cooks food</p>
+                <p>👨‍💼 <strong>Manager</strong> = Manages everyone</p>
+                <p>👨‍💻 <strong>Waiter</strong> = Serves customers</p>
+                <p>🧹 <strong>Cleaner</strong> = Cleans</p>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
+                    Each person has a job. That's organizing! 😊
+                </p>
+            </div>
+
+            <div class="visual-card">
+                <h3>🏗️ Organizational Pyramid</h3>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
+                        👑 TOP BOSS
+                    </div>
+                    <div style="font-size: 2rem; color: var(--primary);">↓</div>
+                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
+                        👔 MIDDLE MANAGERS
+                    </div>
+                    <div style="font-size: 2rem; color: var(--primary);">↓</div>
+                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
+                        👷 WORKERS
+                    </div>
+                </div>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">🔨</span>
+                    <div><strong>Work Specialization</strong></div>
+                    <div>Each person does one thing</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📁</span>
+                    <div><strong>Departmentalization</strong></div>
+                    <div>Group similar jobs</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🔗</span>
+                    <div><strong>Chain of Command</strong></div>
+                    <div>Who reports to whom</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">👥</span>
+                    <div><strong>Span of Control</strong></div>
+                    <div>How many people one boss manages</div>
+                </div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">📏</div>
+                    <h4>Narrow Span</h4>
+                    <p>Boss manages FEW people</p>
+                    <p>Close watch 👀</p>
+                    <p>More control</p>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">🌊</div>
+                    <h4>Wide Span</h4>
+                    <p>Boss manages MANY people</p>
+                    <p>Less watch 👓</p>
+                    <p>More freedom</p>
+                </div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">👑</div>
+                    <h4>Centralization</h4>
+                    <p>TOP BOSS decides everything</p>
+                    <p>Like a king 👑</p>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">🤝</div>
+                    <h4>Decentralization</h4>
+                    <p>EVERYONE helps decide</p>
+                    <p>Like a team 🤝</p>
+                </div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">🔒</div>
+                    <h4>Mechanistic (Rigid)</h4>
+                    <p>Many rules 📋</p>
+                    <p>Strict 🔒</p>
+                    <p>Good for: Stable work</p>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">🔄</div>
+                    <h4>Organic (Flexible)</h4>
+                    <p>Few rules 🎯</p>
+                    <p>Flexible 🔄</p>
+                    <p>Good for: Changing work</p>
+                </div>
+            </div>
+
+            <div class="mnemonic">
+                💡 KEY RULE: Unity of Command = Each employee has ONLY ONE boss! No confusion! 🎯
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section id="leadership" class="section">
+            <h2>👔 Leadership - Inspire People! ✨</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICK: Leadership = Influence people (not just authority) = Make them WANT to follow you! ✨
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">👔</div>
+                    <h4>Management</h4>
+                    <p>Uses POSITION power</p>
+                    <p>"I'm the boss!"</p>
+                    <p>Formal authority</p>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">⭐</div>
+                    <h4>Leadership</h4>
+                    <p>Uses INFLUENCE</p>
+                    <p>"Follow me!"</p>
+                    <p>Inspires people</p>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <h3>📖 Simple Story:</h3>
+                <p><strong>Manager:</strong> "Do this because I'm your boss!" 👔</p>
+                <p><strong>Leader:</strong> "Let's do this together! We can do it!" ⭐</p>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
+                    Leader = Makes people WANT to work! 😊
+                </p>
+            </div>
+
+            <div class="dimension-visual">
+                <div class="dim-card" data-icon="🧬">
+                    <h4>Trait Theory</h4>
+                    <p><strong>Leaders are BORN</strong> 🧬</p>
+                    <p>Like superpowers!</p>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>✅ Confident (Extraversion)</li>
+                        <li>✅ Responsible (Conscientiousness)</li>
+                        <li>✅ Creative (Openness)</li>
+                        <li>✅ Understand emotions (EI)</li>
+                    </ul>
+                </div>
+
+                <div class="dim-card" data-icon="📚">
+                    <h4>Behavioral Theory</h4>
+                    <p><strong>Leaders are MADE</strong> 📚</p>
+                    <p>Can learn it!</p>
+                    <p style="margin-top: 15px; font-size: 1.2rem;">
+                        Anyone can become a leader through training! 🎓
+                    </p>
+                </div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-card high">
+                    <div class="emoji-big">⭐</div>
+                    <h4>In-Group (Favorites)</h4>
+                    <p>Close to leader</p>
+                    <p>More trust 🤝</p>
+                    <p>More rewards 🎁</p>
+                    <p>More work</p>
+                </div>
+                <div class="compare-card low">
+                    <div class="emoji-big">👥</div>
+                    <h4>Out-Group (Others)</h4>
+                    <p>Formal relationship</p>
+                    <p>Less trust</p>
+                    <p>Fewer rewards</p>
+                    <p>Less work</p>
+                </div>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">✨</span>
+                    <div><strong>Charismatic</strong></div>
+                    <div>Strong personality, inspires</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🔄</span>
+                    <div><strong>Transformational</strong></div>
+                    <div>Changes people, motivates</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🤝</span>
+                    <div><strong>Trust</strong></div>
+                    <div>Honest, fair, consistent</div>
+                </div>
+            </div>
+
+            <div class="mnemonic">
+                💡 TRUST = Honesty + Consistency + Competence = People follow you! 🤝
+            </div>
+        </section>
+
+        <!-- Controlling Section -->
+        <section id="controlling" class="section">
+            <h2>✅ Controlling - Check & Fix! 🔍</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICK: Controlling = "Measure → Compare → Fix" = Like checking homework! 📝
+            </div>
+
+            <div class="flowchart">
+                <div class="flow-box">📊 Measure Performance</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">⚖️ Compare with Standard</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">🔧 Take Action (Fix if needed)</div>
+            </div>
+
+            <div class="story-box">
+                <h3>📖 Simple Story:</h3>
+                <p><strong>Like checking if you studied enough:</strong></p>
+                <p>📊 <strong>Measure:</strong> How many hours did you study? (5 hours)</p>
+                <p>⚖️ <strong>Compare:</strong> Standard is 8 hours. You did 5. That's less!</p>
+                <p>🔧 <strong>Fix:</strong> Study 3 more hours to reach 8!</p>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
+                    That's controlling! Simple! 😊
+                </p>
+            </div>
+
+            <div class="visual-timeline">
+                <div class="timeline-step" data-number="1">
+                    <h4>📊 Step 1: Measure</h4>
+                    <p>Check actual work</p>
+                    <p>How: Watch, reports, numbers</p>
+                    <p>What: Sales, costs, quality</p>
+                </div>
+                <div class="timeline-step" data-number="2">
+                    <h4>⚖️ Step 2: Compare</h4>
+                    <p>Actual vs Standard</p>
+                    <p>Is it good or bad?</p>
+                    <p>How much difference?</p>
+                </div>
+                <div class="timeline-step" data-number="3">
+                    <h4>🔧 Step 3: Fix</h4>
+                    <p>If bad → Fix it!</p>
+                    <p>If good → Do nothing</p>
+                    <p>If standard wrong → Change it</p>
+                </div>
+            </div>
+
+            <div class="dimension-visual">
+                <div class="dim-card" data-icon="🛡️">
+                    <h4>Feedforward Control</h4>
+                    <p><strong>BEFORE work</strong> 🛡️</p>
+                    <p>Prevent problems</p>
+                    <p>Like checking car before trip</p>
+                </div>
+
+                <div class="dim-card" data-icon="👀">
+                    <h4>Concurrent Control</h4>
+                    <p><strong>DURING work</strong> 👀</p>
+                    <p>Watch while working</p>
+                    <p>Like teacher watching exam</p>
+                </div>
+
+                <div class="dim-card" data-icon="📝">
+                    <h4>Feedback Control</h4>
+                    <p><strong>AFTER work</strong> 📝</p>
+                    <p>Check results</p>
+                    <p>Like checking test score</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📈 Productivity Formula</h3>
+                <div class="big-text">
+                    Productivity = Output ÷ Input
+                </div>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">📤</span>
+                        <div><strong>Output</strong></div>
+                        <div>Sales, services</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">📥</span>
+                        <div><strong>Input</strong></div>
+                        <div>Labor, materials, costs</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">📊</span>
+                        <div><strong>Higher = Better</strong></div>
+                        <div>More efficient!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-visual">
+                <h4>📊 Balanced Scorecard - 4 Areas</h4>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">💰</span>
+                        <div><strong>Financial</strong></div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">👥</span>
+                        <div><strong>Customer</strong></div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">⚙️</span>
+                        <div><strong>Internal</strong></div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">📈</span>
+                        <div><strong>Growth</strong></div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-weight: bold;">
+                    All 4 must be balanced! ⚖️
+                </p>
+            </div>
+        </section>
+
+        <!-- Exam Tips Section -->
+        <section id="exam" class="section">
+            <h2>📝 Exam Tips - Quick Memory! 🧠</h2>
+            
+            <div class="memory-box">
+                🧠 MEMORY TRICKS: Planning = What+How+When | Organizing = Who+What | Leadership = Influence | Controlling = Measure+Compare+Fix
+            </div>
+
+            <div class="exam-visual">
+                <h4>🎯 Direct Questions (Just Memorize!)</h4>
+                
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Q: Why planning important?</strong></p>
+                    <p>✅ Direction + Less confusion + Save money + Set standards</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Q: Organizational structure elements?</strong></p>
+                    <p>✅ Work specialization + Departmentalization + Chain of command + Span of control</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Q: Leadership vs Management?</strong></p>
+                    <p>✅ Management = Authority | Leadership = Influence</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <p><strong>Q: Control process?</strong></p>
+                    <p>✅ Measure → Compare → Fix</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎭 Scenario Questions (Understand the Story!)</h3>
+                
+                <div class="story-box" style="margin: 15px 0;">
+                    <p><strong>Scenario 1:</strong> Employees confused, don't know who to report to</p>
+                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
+                        ✅ Answer: Missing chain of command
+                    </p>
+                </div>
+
+                <div class="story-box" style="margin: 15px 0;">
+                    <p><strong>Scenario 2:</strong> Manager checks work while it's being done</p>
+                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
+                        ✅ Answer: Concurrent control
+                    </p>
+                </div>
+
+                <div class="story-box" style="margin: 15px 0;">
+                    <p><strong>Scenario 3:</strong> Leader inspires with vision</p>
+                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
+                        ✅ Answer: Transformational leadership
+                    </p>
+                </div>
+
+                <div class="story-box" style="margin: 15px 0;">
+                    <p><strong>Scenario 4:</strong> Fast-changing environment, needs flexibility</p>
+                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
+                        ✅ Answer: Organic structure
+                    </p>
+                </div>
+            </div>
+
+            <div class="mnemonic">
+                💡 ONE-LINE SUMMARY:<br>
+                Planning = Roadmap 🗺️ | Organizing = Team Building 👥 | Leadership = Inspiration ⭐ | Controlling = Checking 📝
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">🗺️</span>
+                    <div><strong>Planning</strong></div>
+                    <div>What + How + When</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">👥</span>
+                    <div><strong>Organizing</strong></div>
+                    <div>Who + What</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">⭐</span>
+                    <div><strong>Leadership</strong></div>
+                    <div>Influence</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📝</span>
+                    <div><strong>Controlling</strong></div>
+                    <div>Measure+Compare+Fix</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('themeText').textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
