@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Management Principles - Super Visual Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Grading - Complete Beginner Guide</title>
     <style>
         * {
             margin: 0;
@@ -13,9 +13,9 @@
 
         :root {
             --primary: #00D9A5;
-            --primary-dark: #00B894;
             --secondary: #00CEC9;
             --accent: #55EFC4;
+            --success: #10b981;
             --warning: #FDCB6E;
             --error: #E17055;
             --bg-primary: #FFFFFF;
@@ -24,513 +24,145 @@
             --text-secondary: #636E72;
             --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
             --shadow: rgba(0, 217, 165, 0.1);
-            --shadow-hover: rgba(0, 217, 165, 0.2);
         }
 
         [data-theme="dark"] {
-            --primary: #00D9A5;
-            --primary-dark: #00B894;
-            --secondary: #00CEC9;
-            --accent: #55EFC4;
-            --warning: #FDCB6E;
-            --error: #E17055;
             --bg-primary: #1A1A1A;
             --bg-secondary: #2D2D2D;
             --text-primary: #FFFFFF;
             --text-secondary: #E0E0E0;
-            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
-            --shadow: rgba(0, 217, 165, 0.2);
-            --shadow-hover: rgba(0, 217, 165, 0.3);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-secondary);
             color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.8;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 15px;
-            width: 100%;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
             background: var(--bg-primary);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            padding: 10px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        header {
-            text-align: center;
-            padding: 30px 15px;
-            background: var(--gradient);
-            color: white;
-            animation: fadeInDown 1s ease;
-            margin: 0 -15px 20px -15px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-
-        header h1 {
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-            padding: 0 5px;
-        }
-
-        .nav-btn {
-            background: var(--bg-primary);
-            color: var(--primary);
-            padding: 10px 18px;
-            border: 2px solid var(--primary);
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow);
-            white-space: nowrap;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            background: var(--primary);
-            color: white;
-        }
-
-        .nav-btn.active {
-            background: var(--gradient);
-            color: white;
-            border-color: transparent;
-        }
-
-        .section {
-            background: var(--bg-primary);
-            margin: 20px 0;
-            padding: clamp(20px, 4vw, 40px);
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 4px 20px var(--shadow);
-            display: none;
-            width: 100%;
-            overflow: hidden;
         }
 
-        .section.active {
-            display: block;
-        }
-
-        .section h2 {
-            color: var(--primary);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 10px;
+        h1 {
             text-align: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            padding: 20px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 15px;
         }
 
-        .section h3 {
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        h3 {
             color: var(--secondary);
-            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
-            margin: 25px 0 15px 0;
+            font-size: 1.5rem;
+            margin: 30px 0 15px 0;
         }
 
-        .section h4 {
-            color: var(--accent);
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            margin: 18px 0 10px 0;
-        }
-
-        /* Visual Memory Boxes */
-        .memory-box {
+        .step-box {
             background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
             border: 3px solid #FFA500;
             border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 1.3rem;
             font-weight: bold;
+            text-align: center;
             color: #8B4513;
             box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
-            animation: pulse 2s infinite;
         }
 
-        [data-theme="dark"] .memory-box {
+        [data-theme="dark"] .step-box {
             background: linear-gradient(135deg, #4A4A2A 0%, #6B6B3A 100%);
             color: #FFD700;
-            border-color: #FFA500;
         }
 
-        /* Visual Flowchart */
-        .flowchart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 0;
-            padding: 20px;
+        .instruction-box {
             background: var(--bg-secondary);
-            border-radius: 15px;
-        }
-
-        .flow-box {
-            background: var(--gradient);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            min-width: 200px;
-            max-width: 100%;
-            box-shadow: 0 4px 12px var(--shadow);
-            position: relative;
-        }
-
-        .flow-arrow {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Visual Comparison Cards */
-        .visual-compare {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .compare-card {
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .compare-card:hover {
-            transform: scale(1.05);
-        }
-
-        .compare-card.high {
-            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
-            color: white;
-        }
-
-        .compare-card.low {
-            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
-            color: white;
-        }
-
-        /* Icon Grid */
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .icon-item {
-            background: var(--bg-secondary);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .icon-item:hover {
-            background: var(--gradient);
-            color: white;
-            transform: translateY(-5px);
-        }
-
-        .icon-item .emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        /* Visual Timeline */
-        .visual-timeline {
-            position: relative;
-            padding: 20px 0;
-            margin: 30px 0;
-        }
-
-        .visual-timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--gradient);
-        }
-
-        .timeline-step {
-            position: relative;
-            margin: 30px 0;
-            padding: 20px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            margin-left: 80px;
             border-left: 5px solid var(--primary);
-            box-shadow: 0 2px 8px var(--shadow);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.2rem;
         }
 
-        .timeline-step::before {
-            content: attr(data-number);
-            position: absolute;
-            left: -65px;
-            top: 50%;
-            transform: translateY(-50%);
+        .click-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #D4F1F4 100%);
+            border: 2px dashed var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        [data-theme="dark"] .click-box {
+            background: linear-gradient(135deg, #2A4A3A 0%, #3A5A5A 100%);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            border: 3px solid #FFA500;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #55EFC4 100%);
+            border: 3px solid var(--success);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+
+        .visual-guide {
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        [data-theme="dark"] .visual-guide {
+            background: var(--bg-secondary);
+        }
+
+        .big-number {
+            display: inline-block;
             width: 50px;
             height: 50px;
             background: var(--gradient);
             color: white;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        /* Visual Card */
-        .visual-card {
-            background: var(--bg-secondary);
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .visual-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px var(--shadow-hover);
-        }
-
-        /* Dimension Visual Cards */
-        .dimension-visual {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .dim-card {
-            background: var(--gradient);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dim-card::before {
-            content: attr(data-icon);
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 3rem;
-            opacity: 0.3;
-        }
-
-        .dim-card:hover {
-            transform: scale(1.02) rotate(1deg);
-            box-shadow: 0 8px 25px var(--shadow-hover);
-        }
-
-        .dim-card h4 {
-            color: white;
-            font-size: clamp(1.2rem, 3vw, 1.4rem);
-            margin-bottom: 15px;
-        }
-
-        /* Visual Bar Chart */
-        .visual-bars {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: auto;
-            min-height: 200px;
-            margin: 30px 0;
-            gap: 15px;
-            padding: 20px;
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            flex-wrap: wrap;
-        }
-
-        .visual-bar {
-            flex: 1;
-            min-width: 70px;
-            max-width: 150px;
-            background: var(--gradient);
-            border-radius: 8px 8px 0 0;
-            position: relative;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 10px;
-            color: white;
-            font-weight: bold;
-            font-size: clamp(0.8rem, 2vw, 1rem);
-        }
-
-        .visual-bar:hover {
-            transform: scaleY(1.1);
-            opacity: 0.9;
-        }
-
-        /* Mnemonic Box */
-        .mnemonic {
-            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
-            border: 3px dashed #FF6B9D;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
             text-align: center;
-            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            line-height: 50px;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #8B008B;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-        }
-
-        [data-theme="dark"] .mnemonic {
-            background: linear-gradient(135deg, #4A2A4A 0%, #6B3A6B 100%);
-            color: #FFB6C1;
-            border-color: #FF6B9D;
-        }
-
-        /* Visual Story Box */
-        .story-box {
-            background: linear-gradient(135deg, #A8E6CF 0%, #D4F1F4 100%);
-            border-left: 5px solid var(--primary);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        [data-theme="dark"] .story-box {
-            background: linear-gradient(135deg, #2A4A3A 0%, #3A5A5A 100%);
-        }
-
-        /* Progress Indicator */
-        .progress-visual {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
-            padding: 15px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-        }
-
-        .progress-bar {
-            flex: 1;
-            height: 30px;
-            background: var(--bg-tertiary);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 15px;
-            transition: width 1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        /* Visual Connection Lines */
-        .connection-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 25px 0;
-        }
-
-        .connection-item {
-            background: var(--gradient);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            box-shadow: 0 4px 12px var(--shadow);
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .connection-arrow {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Simple Text Styles */
-        .big-text {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: bold;
-            color: var(--primary);
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .simple-text {
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
-            line-height: 1.8;
-            margin: 15px 0;
+            margin-right: 15px;
+            vertical-align: middle;
         }
 
         .emoji-big {
@@ -540,761 +172,803 @@
             margin: 20px 0;
         }
 
-        /* Exam Tip Visual */
-        .exam-visual {
+        .button-visual {
             background: var(--gradient);
             color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border-left: 5px solid white;
-            box-shadow: 0 4px 15px var(--shadow);
+            padding: 15px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--shadow);
         }
 
-        .exam-visual h4 {
+        .table-visual {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+
+        .table-visual th {
+            background: var(--gradient);
             color: white;
-            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            padding: 15px;
+            text-align: left;
+            border: 2px solid var(--primary);
+        }
+
+        .table-visual td {
+            padding: 12px;
+            border: 1px solid var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        .formula-box {
+            background: #2D3436;
+            color: #00D9A5;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .icon-item {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover {
+            transform: scale(1.05);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .icon-item .emoji {
+            font-size: 4rem;
+            display: block;
             margin-bottom: 15px;
         }
 
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
         ul, ol {
-            margin-left: 25px;
-            margin-top: 10px;
+            margin-left: 30px;
+            margin-top: 15px;
         }
 
         li {
-            margin: 10px 0;
-            font-size: clamp(1rem, 3vw, 1.1rem);
+            margin: 15px 0;
+            font-size: 1.1rem;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .highlight {
+            background: yellow;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
         }
 
         @media (max-width: 768px) {
-            .visual-timeline::before {
-                left: 20px;
+            .container {
+                padding: 15px;
             }
 
-            .timeline-step {
-                margin-left: 60px;
+            h1 {
+                font-size: 1.8rem;
             }
 
-            .timeline-step::before {
-                left: -45px;
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .dimension-visual {
-                grid-template-columns: 1fr;
-            }
-
-            .visual-compare {
-                grid-template-columns: 1fr;
+            h2 {
+                font-size: 1.5rem;
             }
 
             .icon-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <button class="theme-toggle" onclick="toggleTheme()">
-        <span id="themeIcon">🌙</span>
-        <span id="themeText">Dark</span>
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
     </button>
 
-    <header>
-        <h1>📚 Management Principles</h1>
-        <p>Super Visual Guide - Made for Easy Learning!</p>
-    </header>
-
     <div class="container">
-        <nav class="nav-menu">
-            <button class="nav-btn active" onclick="showSection('hofstede')">🌍 Hofstede</button>
-            <button class="nav-btn" onclick="showSection('planning')">📋 Planning</button>
-            <button class="nav-btn" onclick="showSection('organizing')">🏢 Organizing</button>
-            <button class="nav-btn" onclick="showSection('leadership')">👔 Leadership</button>
-            <button class="nav-btn" onclick="showSection('controlling')">✅ Controlling</button>
-            <button class="nav-btn" onclick="showSection('exam')">📝 Exam Tips</button>
-        </nav>
+        <h1>📊 Excel Grading Guide<br>For Complete Beginners</h1>
 
-        <!-- Hofstede Section -->
-        <section id="hofstede" class="section active">
-            <h2>🌍 Hofstede's 6 Cultural Dimensions</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICK: "PIMUTI" - Power, Individualism, Masculinity, Uncertainty, Time, Indulgence
+        <div class="step-box">
+            🎯 This guide is for people who have NEVER used a computer before!<br>
+            Every single step is explained with pictures and simple words! 😊
+        </div>
+
+        <!-- Part 1: What is Excel -->
+        <h2>📖 Part 1: What is Excel? (Very Simple Explanation)</h2>
+
+        <div class="instruction-box">
+            <p><strong>Excel is like a digital notebook with boxes!</strong> 📓</p>
+            <p>Imagine a notebook with many small boxes (like a grid).</p>
+            <p>Each box can hold:</p>
+            <ul>
+                <li>📝 Numbers (like grades: 85, 90, 75)</li>
+                <li>📝 Text (like names: Ali, Sara, Ahmed)</li>
+                <li>📝 Formulas (Excel can do math for you!)</li>
+            </ul>
+        </div>
+
+        <div class="visual-guide">
+            <div class="emoji-big">📊</div>
+            <p><strong>Think of Excel like this:</strong></p>
+            <table class="table-visual">
+                <tr>
+                    <th>Name</th>
+                    <th>Test 1</th>
+                    <th>Test 2</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>Ali</td>
+                    <td>85</td>
+                    <td>90</td>
+                    <td>175</td>
+                </tr>
+                <tr>
+                    <td>Sara</td>
+                    <td>75</td>
+                    <td>80</td>
+                    <td>155</td>
+                </tr>
+            </table>
+            <p>Each box is called a <strong>"cell"</strong> 📦</p>
+        </div>
+
+        <!-- Part 2: Opening Excel -->
+        <h2>🖥️ Part 2: How to Open Excel (Step by Step)</h2>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">1</span> Turn On Your Computer</h3>
+            <p>Press the power button (usually on the front or side of computer)</p>
+            <p>Wait for the screen to show something (this takes 1-2 minutes)</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">2</span> Find the Excel Icon</h3>
+            <p>Look at your computer screen. You will see many small pictures (these are called "icons")</p>
+            <p>Look for an icon that looks like this: <span style="font-size: 2rem;">📊</span> or has letters "XL" or "Excel"</p>
+            <div class="warning-box">
+                ⚠️ <strong>Can't find it?</strong> Don't worry! Look for a button that says "Start" (usually at bottom left corner). Click it, then type "Excel" in the search box.
             </div>
+        </div>
 
-            <div class="big-text">Think of it like 6 different lenses to see cultures! 👓</div>
-
-            <div class="dimension-visual">
-                <div class="dim-card" data-icon="👑">
-                    <h4>1. Power Distance 👑</h4>
-                    <p><strong>High = Boss is King</strong> 👑</p>
-                    <p>China, Saudi Arabia</p>
-                    <p><strong>Low = Everyone Equal</strong> 🤝</p>
-                    <p>Sweden, Denmark</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Management:</strong><br>
-                        High = Strict boss 👔<br>
-                        Low = Friendly boss 😊
-                    </div>
-                </div>
-
-                <div class="dim-card" data-icon="👤">
-                    <h4>2. Individualism vs Collectivism 👤👥</h4>
-                    <p><strong>Individualism = "ME"</strong> 👤</p>
-                    <p>USA, Australia</p>
-                    <p><strong>Collectivism = "WE"</strong> 👥</p>
-                    <p>Japan, China</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Reward:</strong><br>
-                        Individual = Personal prize 🏆<br>
-                        Collective = Team prize 🎉
-                    </div>
-                </div>
-
-                <div class="dim-card" data-icon="💪">
-                    <h4>3. Masculinity vs Femininity 💪💝</h4>
-                    <p><strong>Masculine = Competition</strong> 💪</p>
-                    <p>Japan, Germany</p>
-                    <p><strong>Feminine = Care</strong> 💝</p>
-                    <p>Norway, Sweden</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Focus:</strong><br>
-                        Masculine = Win! 🏆<br>
-                        Feminine = Balance ⚖️
-                    </div>
-                </div>
-
-                <div class="dim-card" data-icon="⚠️">
-                    <h4>4. Uncertainty Avoidance ⚠️</h4>
-                    <p><strong>High = Many Rules</strong> 📋</p>
-                    <p>Chile, Peru</p>
-                    <p><strong>Low = Flexible</strong> 🔄</p>
-                    <p>Singapore, Jamaica</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Management:</strong><br>
-                        High = Strict rules 📜<br>
-                        Low = Try new things 🚀
-                    </div>
-                </div>
-
-                <div class="dim-card" data-icon="⏰">
-                    <h4>5. Time Orientation ⏰</h4>
-                    <p><strong>Short-term = Now!</strong> ⚡</p>
-                    <p>Morocco, Philippines</p>
-                    <p><strong>Long-term = Future</strong> 🔮</p>
-                    <p>China, Japan</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Focus:</strong><br>
-                        Short = Quick results ⚡<br>
-                        Long = Patient planning 🎯
-                    </div>
-                </div>
-
-                <div class="dim-card" data-icon="🎉">
-                    <h4>6. Indulgence vs Restraint 🎉🚫</h4>
-                    <p><strong>Indulgence = Fun!</strong> 🎉</p>
-                    <p>Mexico, Brazil</p>
-                    <p><strong>Restraint = Control</strong> 🚫</p>
-                    <p>Egypt, Pakistan</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                        <strong>Culture:</strong><br>
-                        Indulgent = Free & fun 🎊<br>
-                        Restrained = Disciplined 📏
-                    </div>
-                </div>
+        <div class="instruction-box">
+            <h3><span class="big-number">3</span> Click on Excel Icon</h3>
+            <div class="click-box">
+                👆 <strong>HOW TO CLICK:</strong><br>
+                1. Move your mouse (the small device on your desk)<br>
+                2. Move the arrow on screen over the Excel icon<br>
+                3. Press the LEFT button on your mouse ONCE (this is called "clicking")<br>
+                4. Wait 2-3 seconds
             </div>
+            <p>Excel will open! You will see a white screen with many small boxes (cells).</p>
+        </div>
 
-            <div class="mnemonic">
-                💡 WHY IT MATTERS: Helps you understand why people from different countries act differently at work!
+        <div class="success-box">
+            ✅ <strong>SUCCESS!</strong> If you see a white screen with boxes, you did it! 🎉
+        </div>
+
+        <!-- Part 3: Understanding the Screen -->
+        <h2>👀 Part 3: Understanding What You See on Screen</h2>
+
+        <div class="icon-grid">
+            <div class="icon-item">
+                <span class="emoji">📦</span>
+                <div><strong>Cells</strong></div>
+                <div>Small boxes where you type</div>
             </div>
-
-            <div class="visual-bars">
-                <div class="visual-bar" style="height: 90%;">
-                    <div>Understand Behavior</div>
-                </div>
-                <div class="visual-bar" style="height: 85%;">
-                    <div>Global Teams</div>
-                </div>
-                <div class="visual-bar" style="height: 80%;">
-                    <div>Less Fights</div>
-                </div>
-                <div class="visual-bar" style="height: 95%;">
-                    <div>Choose Leader</div>
-                </div>
+            <div class="icon-item">
+                <span class="emoji">🔤</span>
+                <div><strong>Column</strong></div>
+                <div>Vertical line of cells (A, B, C...)</div>
             </div>
-        </section>
-
-        <!-- Planning Section -->
-        <section id="planning" class="section">
-            <h2>📋 Planning - The Roadmap! 🗺️</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICK: Planning = "What + How + When" = Roadmap to Success! 🗺️
+            <div class="icon-item">
+                <span class="emoji">📋</span>
+                <div><strong>Row</strong></div>
+                <div>Horizontal line of cells (1, 2, 3...)</div>
             </div>
-
-            <div class="flowchart">
-                <div class="flow-box">🎯 Set Goals</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box">📝 Make Plan</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box">⏰ Do It</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box">✅ Check Results</div>
+            <div class="icon-item">
+                <span class="emoji">📝</span>
+                <div><strong>Formula Bar</strong></div>
+                <div>Shows what's in selected cell</div>
             </div>
+        </div>
 
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">📝</div>
-                    <h4>Formal Planning</h4>
-                    <ul style="text-align: left; margin-top: 15px;">
-                        <li>✅ Written down</li>
-                        <li>✅ Long-term</li>
-                        <li>✅ Big companies</li>
-                        <li>✅ Official</li>
-                    </ul>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">💭</div>
-                    <h4>Informal Planning</h4>
-                    <ul style="text-align: left; margin-top: 15px;">
-                        <li>❌ Not written</li>
-                        <li>❌ Short-term</li>
-                        <li>❌ Small places</li>
-                        <li>❌ Just thoughts</li>
-                    </ul>
-                </div>
+        <div class="visual-guide">
+            <p><strong>Look at the top of Excel screen:</strong></p>
+            <p>You will see letters: <strong>A B C D E F...</strong> (These are columns)</p>
+            <p>You will see numbers: <strong>1 2 3 4 5...</strong> (These are rows)</p>
+            <p>Where column A and row 1 meet = Cell A1</p>
+            <p>Where column B and row 2 meet = Cell B2</p>
+            <div class="formula-box">
+                Cell Name = Column Letter + Row Number<br>
+                Example: A1, B2, C3
             </div>
+        </div>
 
-            <div class="story-box">
-                <h3>📖 Simple Story:</h3>
-                <p><strong>Imagine you want to build a house:</strong></p>
-                <p>🏠 <strong>Goal:</strong> Build a house</p>
-                <p>📋 <strong>Plan:</strong> Get materials, hire workers, build step by step</p>
-                <p>⏰ <strong>When:</strong> Start Monday, finish in 3 months</p>
-                <p>✅ <strong>Check:</strong> Is it done? Does it look good?</p>
-                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
-                    That's planning! Simple! 😊
-                </p>
+        <!-- Part 4: Clicking on Cells -->
+        <h2>🖱️ Part 4: How to Click on a Cell (Very Important!)</h2>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">1</span> Move Your Mouse</h3>
+            <p>Move the mouse on your desk. Watch the arrow on screen move.</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">2</span> Point to a Cell</h3>
+            <p>Move the arrow over any small box (cell) on the screen.</p>
+            <p>For example, move it over the box where column A and row 1 meet.</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">3</span> Click Once</h3>
+            <div class="click-box">
+                👆 <strong>Click the LEFT button on your mouse ONCE</strong><br>
+                You will see the box get a black border around it. This means it's selected! ✅
             </div>
+        </div>
 
-            <div class="visual-timeline">
-                <div class="timeline-step" data-number="1">
-                    <h4>🎯 Step 1: Set Goals</h4>
-                    <p>What do you want? (Like: "I want to sell 1000 products")</p>
-                </div>
-                <div class="timeline-step" data-number="2">
-                    <h4>📝 Step 2: Make Plan</h4>
-                    <p>How will you do it? (Like: "Advertise, hire sales team, open store")</p>
-                </div>
-                <div class="timeline-step" data-number="3">
-                    <h4>⏰ Step 3: Set Time</h4>
-                    <p>When will you do it? (Like: "Start next month, finish in 6 months")</p>
-                </div>
-                <div class="timeline-step" data-number="4">
-                    <h4>✅ Step 4: Check</h4>
-                    <p>Did it work? (Like: "Did we sell 1000? Yes or No?")</p>
-                </div>
+        <div class="warning-box">
+            ⚠️ <strong>IMPORTANT:</strong> You must click on a cell BEFORE you can type in it!
+        </div>
+
+        <!-- Part 5: Typing in Cells -->
+        <h2>⌨️ Part 5: How to Type in a Cell</h2>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">1</span> Click on a Cell</h3>
+            <p>Click on cell A1 (top left box)</p>
+            <p>You should see a black border around it</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">2</span> Start Typing</h3>
+            <p>Just start typing on your keyboard!</p>
+            <p>Type: <strong>"Name"</strong></p>
+            <p>You will see the letters appear in the cell AND in the formula bar at the top</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3><span class="big-number">3</span> Press Enter</h3>
+            <div class="click-box">
+                ⌨️ <strong>Find the ENTER key on your keyboard</strong><br>
+                It's the big key on the right side, usually has an arrow pointing down and left<br>
+                Press it ONCE
             </div>
+            <p>Your text is now saved in that cell! ✅</p>
+        </div>
 
-            <div class="exam-visual">
-                <h4>🎯 MBO (Management by Objectives)</h4>
-                <div class="connection-box">
-                    <div class="connection-item">Boss + Employee</div>
-                    <div class="connection-arrow">↓</div>
-                    <div class="connection-item">Set Goals Together</div>
-                    <div class="connection-arrow">↓</div>
-                    <div class="connection-item">Check Progress</div>
-                    <div class="connection-arrow">↓</div>
-                    <div class="connection-item">Reward if Good! 🎁</div>
-                </div>
+        <div class="success-box">
+            ✅ <strong>Practice:</strong> Try typing in different cells. Click on B1, type "Test 1", press Enter. Click on C1, type "Test 2", press Enter.
+        </div>
+
+        <!-- Part 6: Creating a Grade Sheet -->
+        <h2>📝 Part 6: Creating Your First Grade Sheet</h2>
+
+        <div class="instruction-box">
+            <h3>Step 1: Type Headers (Column Titles)</h3>
+            <p>We will create a simple grade sheet with 3 students and 2 tests.</p>
+            <ol>
+                <li>Click on cell <strong>A1</strong></li>
+                <li>Type: <strong>"Student Name"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>B1</strong></li>
+                <li>Type: <strong>"Test 1"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>C1</strong></li>
+                <li>Type: <strong>"Test 2"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>D1</strong></li>
+                <li>Type: <strong>"Total"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+        </div>
+
+        <div class="visual-guide">
+            <p><strong>Your screen should look like this:</strong></p>
+            <table class="table-visual">
+                <tr>
+                    <th>A1: Student Name</th>
+                    <th>B1: Test 1</th>
+                    <th>C1: Test 2</th>
+                    <th>D1: Total</th>
+                </tr>
+                <tr>
+                    <td>(empty)</td>
+                    <td>(empty)</td>
+                    <td>(empty)</td>
+                    <td>(empty)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 2: Enter Student Names</h3>
+            <ol>
+                <li>Click on cell <strong>A2</strong></li>
+                <li>Type: <strong>"Ali"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>A3</strong></li>
+                <li>Type: <strong>"Sara"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>A4</strong></li>
+                <li>Type: <strong>"Ahmed"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 3: Enter Test Scores</h3>
+            <p><strong>For Ali (Row 2):</strong></p>
+            <ol>
+                <li>Click on cell <strong>B2</strong></li>
+                <li>Type: <strong>85</strong> (just the number, no words)</li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>C2</strong></li>
+                <li>Type: <strong>90</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+            <p><strong>For Sara (Row 3):</strong></p>
+            <ol>
+                <li>Click on cell <strong>B3</strong></li>
+                <li>Type: <strong>75</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>C3</strong></li>
+                <li>Type: <strong>80</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+            <p><strong>For Ahmed (Row 4):</strong></p>
+            <ol>
+                <li>Click on cell <strong>B4</strong></li>
+                <li>Type: <strong>95</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>Click on cell <strong>C4</strong></li>
+                <li>Type: <strong>88</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+        </div>
+
+        <div class="visual-guide">
+            <p><strong>Your screen should now look like this:</strong></p>
+            <table class="table-visual">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Test 1</th>
+                    <th>Test 2</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>Ali</td>
+                    <td>85</td>
+                    <td>90</td>
+                    <td>(empty)</td>
+                </tr>
+                <tr>
+                    <td>Sara</td>
+                    <td>75</td>
+                    <td>80</td>
+                    <td>(empty)</td>
+                </tr>
+                <tr>
+                    <td>Ahmed</td>
+                    <td>95</td>
+                    <td>88</td>
+                    <td>(empty)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Part 7: Adding Numbers (Formulas) -->
+        <h2>➕ Part 7: Making Excel Add Numbers for You (Formulas)</h2>
+
+        <div class="step-box">
+            🧮 This is the MAGIC part! Excel can do math for you! ✨
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 1: Click Where You Want the Answer</h3>
+            <p>We want the total for Ali (Test 1 + Test 2)</p>
+            <p>Click on cell <strong>D2</strong> (this is where Ali's total will appear)</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 2: Type the Formula</h3>
+            <div class="click-box">
+                ⌨️ <strong>Type this EXACTLY:</strong><br>
+                <div class="formula-box">=B2+C2</div>
+                <p>Important: Start with <strong>=</strong> (equals sign)</p>
+                <p>B2 means "use the number in cell B2"</p>
+                <p>+ means "add"</p>
+                <p>C2 means "use the number in cell C2"</p>
             </div>
+        </div>
 
-            <div class="icon-grid">
-                <div class="icon-item">
-                    <span class="emoji">🎯</span>
-                    <div><strong>Clear</strong></div>
-                    <div>Everyone understands</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">📏</span>
-                    <div><strong>Measurable</strong></div>
-                    <div>Can count it</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">⏰</span>
-                    <div><strong>Time-bound</strong></div>
-                    <div>Has deadline</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">✅</span>
-                    <div><strong>Achievable</strong></div>
-                    <div>Can actually do it</div>
-                </div>
+        <div class="instruction-box">
+            <h3>Step 3: Press Enter</h3>
+            <p>After typing <strong>=B2+C2</strong>, press <strong>Enter</strong></p>
+            <p>Excel will calculate: 85 + 90 = <strong>175</strong></p>
+            <p>You will see <strong>175</strong> appear in cell D2! 🎉</p>
+        </div>
+
+        <div class="success-box">
+            ✅ <strong>MAGIC!</strong> Excel did the math for you! Now if you change B2 or C2, D2 will automatically update!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 4: Do the Same for Other Students</h3>
+            <p><strong>For Sara:</strong></p>
+            <ol>
+                <li>Click on cell <strong>D3</strong></li>
+                <li>Type: <strong>=B3+C3</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>You should see <strong>155</strong> (75 + 80)</li>
+            </ol>
+            <p><strong>For Ahmed:</strong></p>
+            <ol>
+                <li>Click on cell <strong>D4</strong></li>
+                <li>Type: <strong>=B4+C4</strong></li>
+                <li>Press <strong>Enter</strong></li>
+                <li>You should see <strong>183</strong> (95 + 88)</li>
+            </ol>
+        </div>
+
+        <div class="visual-guide">
+            <p><strong>Your final grade sheet should look like this:</strong></p>
+            <table class="table-visual">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Test 1</th>
+                    <th>Test 2</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>Ali</td>
+                    <td>85</td>
+                    <td>90</td>
+                    <td>175</td>
+                </tr>
+                <tr>
+                    <td>Sara</td>
+                    <td>75</td>
+                    <td>80</td>
+                    <td>155</td>
+                </tr>
+                <tr>
+                    <td>Ahmed</td>
+                    <td>95</td>
+                    <td>88</td>
+                    <td>183</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Part 8: Calculating Average -->
+        <h2>📊 Part 8: Calculating Average Grade</h2>
+
+        <div class="instruction-box">
+            <h3>Step 1: Add "Average" Column</h3>
+            <ol>
+                <li>Click on cell <strong>E1</strong></li>
+                <li>Type: <strong>"Average"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 2: Calculate Average for Ali</h3>
+            <p>Average = Total ÷ Number of Tests</p>
+            <p>For Ali: (85 + 90) ÷ 2 = 87.5</p>
+            <div class="click-box">
+                ⌨️ <strong>Click on cell E2, then type:</strong><br>
+                <div class="formula-box">=D2/2</div>
+                <p>This means: Take the total in D2, divide by 2</p>
+                <p>Press <strong>Enter</strong></p>
+                <p>You should see <strong>87.5</strong></p>
             </div>
-        </section>
+        </div>
 
-        <!-- Organizing Section -->
-        <section id="organizing" class="section">
-            <h2>🏢 Organizing - Who Does What? 👥</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICK: Organizing = "Who does what + Who reports to whom" = Building a Team! 👥
+        <div class="instruction-box">
+            <h3>Step 3: Calculate Average for Others</h3>
+            <p><strong>For Sara:</strong></p>
+            <ol>
+                <li>Click on cell <strong>E3</strong></li>
+                <li>Type: <strong>=D3/2</strong></li>
+                <li>Press <strong>Enter</strong> (You'll see 77.5)</li>
+            </ol>
+            <p><strong>For Ahmed:</strong></p>
+            <ol>
+                <li>Click on cell <strong>E4</strong></li>
+                <li>Type: <strong>=D4/2</strong></li>
+                <li>Press <strong>Enter</strong> (You'll see 91.5)</li>
+            </ol>
+        </div>
+
+        <!-- Part 9: Using SUM Function -->
+        <h2>🔢 Part 9: Using SUM Function (Easier Way to Add)</h2>
+
+        <div class="step-box">
+            💡 There's an EASIER way to add numbers! Use SUM function!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Instead of typing =B2+C2, you can use SUM:</h3>
+            <ol>
+                <li>Click on cell D2</li>
+                <li>Type: <strong>=SUM(B2:C2)</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+            <p><strong>What does this mean?</strong></p>
+            <ul>
+                <li><strong>SUM</strong> = "add these numbers"</li>
+                <li><strong>B2:C2</strong> = "from cell B2 to cell C2" (all cells in between)</li>
+                <li>So it adds B2 + C2 automatically!</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            ⚠️ <strong>B2:C2</strong> means "from B2 to C2" - the colon (:) means "through" or "to"
+        </div>
+
+        <!-- Part 10: Using AVERAGE Function -->
+        <h2>📈 Part 10: Using AVERAGE Function (Easier Way)</h2>
+
+        <div class="instruction-box">
+            <h3>Instead of typing =D2/2, you can use AVERAGE:</h3>
+            <ol>
+                <li>Click on cell E2</li>
+                <li>Type: <strong>=AVERAGE(B2:C2)</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+            <p><strong>What does this mean?</strong></p>
+            <ul>
+                <li><strong>AVERAGE</strong> = "find the average of these numbers"</li>
+                <li><strong>B2:C2</strong> = "from cell B2 to cell C2"</li>
+                <li>So it calculates (B2 + C2) ÷ 2 automatically!</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            ✅ <strong>BONUS TIP:</strong> If you have 3 tests instead of 2, just change C2 to D2: <strong>=AVERAGE(B2:D2)</strong> - Excel will automatically divide by 3!
+        </div>
+
+        <!-- Part 11: Copying Formulas -->
+        <h2>📋 Part 11: Copying Formulas (Time Saver!)</h2>
+
+        <div class="step-box">
+            🎯 Instead of typing the same formula again and again, you can COPY it!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Method 1: Using Fill Handle (Easiest!)</h3>
+            <ol>
+                <li>Click on cell D2 (the one with the formula =B2+C2)</li>
+                <li>Look at the bottom-right corner of the cell - you'll see a small square</li>
+                <li>Move your mouse over that small square - the arrow will change to a + sign</li>
+                <li>Click and HOLD the left mouse button</li>
+                <li>Drag DOWN to cell D4 (while holding the button)</li>
+                <li>Let go of the button</li>
+                <li>Excel will automatically copy the formula and adjust it!</li>
+            </ol>
+            <p>D3 will now have =B3+C3</p>
+            <p>D4 will now have =B4+C4</p>
+            <p>Magic! Excel is smart! ✨</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Method 2: Copy and Paste</h3>
+            <ol>
+                <li>Click on cell D2</li>
+                <li>Press <strong>Ctrl + C</strong> (hold Ctrl key, then press C)</li>
+                <li>Click on cell D3</li>
+                <li>Press <strong>Ctrl + V</strong> (hold Ctrl key, then press V)</li>
+                <li>The formula is copied!</li>
+            </ol>
+        </div>
+
+        <!-- Part 12: Grading System -->
+        <h2>🎓 Part 12: Creating a Letter Grade System</h2>
+
+        <div class="instruction-box">
+            <h3>Step 1: Add "Grade" Column</h3>
+            <ol>
+                <li>Click on cell <strong>F1</strong></li>
+                <li>Type: <strong>"Grade"</strong></li>
+                <li>Press <strong>Enter</strong></li>
+            </ol>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 2: Create Grading Rules</h3>
+            <p>We'll use this system:</p>
+            <ul>
+                <li>90-100 = A (Excellent)</li>
+                <li>80-89 = B (Good)</li>
+                <li>70-79 = C (Average)</li>
+                <li>60-69 = D (Below Average)</li>
+                <li>Below 60 = F (Fail)</li>
+            </ul>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 3: Use IF Formula for Ali</h3>
+            <p>Click on cell F2, then type this LONG formula:</p>
+            <div class="formula-box">
+                =IF(E2>=90,"A",IF(E2>=80,"B",IF(E2>=70,"C",IF(E2>=60,"D","F"))))
             </div>
+            <p><strong>What does this mean?</strong></p>
+            <ul>
+                <li>IF = "check if this is true"</li>
+                <li>E2>=90 = "is the average 90 or more?"</li>
+                <li>If YES → give "A"</li>
+                <li>If NO → check next condition (80 or more?)</li>
+                <li>And so on...</li>
+            </ul>
+            <p>Press <strong>Enter</strong></p>
+            <p>Ali's average is 87.5, so you should see <strong>"B"</strong></p>
+        </div>
 
-            <div class="story-box">
-                <h3>📖 Simple Story:</h3>
-                <p><strong>Imagine a restaurant:</strong></p>
-                <p>👨‍🍳 <strong>Chef</strong> = Cooks food</p>
-                <p>👨‍💼 <strong>Manager</strong> = Manages everyone</p>
-                <p>👨‍💻 <strong>Waiter</strong> = Serves customers</p>
-                <p>🧹 <strong>Cleaner</strong> = Cleans</p>
-                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
-                    Each person has a job. That's organizing! 😊
-                </p>
+        <div class="warning-box">
+            ⚠️ <strong>IMPORTANT:</strong> Make sure you type the formula EXACTLY as shown, including all the commas and quotation marks!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 4: Copy to Other Students</h3>
+            <p>Use the fill handle method from Part 11:</p>
+            <ol>
+                <li>Click on cell F2</li>
+                <li>Drag the small square down to F4</li>
+                <li>Let go</li>
+                <li>Grades will appear for all students!</li>
+            </ol>
+        </div>
+
+        <!-- Part 13: Saving Your Work -->
+        <h2>💾 Part 13: Saving Your Work (Very Important!)</h2>
+
+        <div class="warning-box">
+            ⚠️ <strong>ALWAYS SAVE YOUR WORK!</strong> If you don't save, you'll lose everything when you close Excel!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 1: Click the Save Button</h3>
+            <p>Look at the top-left corner of Excel</p>
+            <p>You'll see a small picture that looks like a floppy disk 💾 (or a folder icon)</p>
+            <p>Click on it ONCE</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 2: Choose Where to Save</h3>
+            <p>A window will pop up asking where to save</p>
+            <p>Click on <strong>"Desktop"</strong> on the left side</p>
+            <p>This will save it on your computer's main screen</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Step 3: Name Your File</h3>
+            <p>At the bottom, you'll see a box that says "File name"</p>
+            <p>Click in that box and type: <strong>"My Grade Sheet"</strong></p>
+            <p>Click the <strong>"Save"</strong> button</p>
+        </div>
+
+        <div class="success-box">
+            ✅ <strong>DONE!</strong> Your work is saved! You can close Excel and open it later - your grades will still be there!
+        </div>
+
+        <!-- Part 14: Common Mistakes -->
+        <h2>❌ Part 14: Common Mistakes (How to Avoid Them)</h2>
+
+        <div class="instruction-box">
+            <h3>Mistake 1: Forgetting the Equals Sign</h3>
+            <p><strong>WRONG:</strong> B2+C2 (Excel thinks this is text, not a formula)</p>
+            <p><strong>RIGHT:</strong> =B2+C2 (The = tells Excel it's a formula)</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Mistake 2: Clicking Wrong Cell</h3>
+            <p><strong>Problem:</strong> You type in the wrong cell</p>
+            <p><strong>Solution:</strong> Always check which cell is selected (it has a black border)</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Mistake 3: Typing Numbers with Words</h3>
+            <p><strong>WRONG:</strong> "85 points" (Excel can't do math with this)</p>
+            <p><strong>RIGHT:</strong> 85 (just the number)</p>
+        </div>
+
+        <div class="instruction-box">
+            <h3>Mistake 4: Not Saving</h3>
+            <p><strong>Problem:</strong> You work for hours, then close Excel without saving</p>
+            <p><strong>Solution:</strong> Save every 5-10 minutes! Press Ctrl+S (hold Ctrl, press S)</p>
+        </div>
+
+        <!-- Part 15: Practice Exercise -->
+        <h2>🎯 Part 15: Practice Exercise</h2>
+
+        <div class="step-box">
+            🏋️ Let's practice! Create a grade sheet for 5 students with 3 tests each!
+        </div>
+
+        <div class="instruction-box">
+            <h3>Your Task:</h3>
+            <ol>
+                <li>Create headers: Name, Test 1, Test 2, Test 3, Total, Average, Grade</li>
+                <li>Add 5 student names (any names you want)</li>
+                <li>Enter test scores (any numbers between 0-100)</li>
+                <li>Calculate Total using SUM formula</li>
+                <li>Calculate Average using AVERAGE formula</li>
+                <li>Calculate Grade using IF formula</li>
+                <li>Save your work!</li>
+            </ol>
+        </div>
+
+        <div class="success-box">
+            ✅ <strong>If you can do this, you've mastered Excel grading!</strong> 🎉
+        </div>
+
+        <!-- Final Tips -->
+        <h2>💡 Final Tips</h2>
+
+        <div class="icon-grid">
+            <div class="icon-item">
+                <span class="emoji">💾</span>
+                <div><strong>Save Often</strong></div>
+                <div>Press Ctrl+S frequently</div>
             </div>
-
-            <div class="visual-card">
-                <h3>🏗️ Organizational Pyramid</h3>
-                <div style="text-align: center; margin: 30px 0;">
-                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
-                        👑 TOP BOSS
-                    </div>
-                    <div style="font-size: 2rem; color: var(--primary);">↓</div>
-                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
-                        👔 MIDDLE MANAGERS
-                    </div>
-                    <div style="font-size: 2rem; color: var(--primary);">↓</div>
-                    <div style="background: var(--gradient); color: white; padding: 20px; border-radius: 12px; margin: 10px auto; max-width: 300px; font-weight: bold;">
-                        👷 WORKERS
-                    </div>
-                </div>
+            <div class="icon-item">
+                <span class="emoji">⌨️</span>
+                <div><strong>Start with =</strong></div>
+                <div>All formulas start with =</div>
             </div>
-
-            <div class="icon-grid">
-                <div class="icon-item">
-                    <span class="emoji">🔨</span>
-                    <div><strong>Work Specialization</strong></div>
-                    <div>Each person does one thing</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">📁</span>
-                    <div><strong>Departmentalization</strong></div>
-                    <div>Group similar jobs</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">🔗</span>
-                    <div><strong>Chain of Command</strong></div>
-                    <div>Who reports to whom</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">👥</span>
-                    <div><strong>Span of Control</strong></div>
-                    <div>How many people one boss manages</div>
-                </div>
+            <div class="icon-item">
+                <span class="emoji">👆</span>
+                <div><strong>Click First</strong></div>
+                <div>Click cell before typing</div>
             </div>
-
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">📏</div>
-                    <h4>Narrow Span</h4>
-                    <p>Boss manages FEW people</p>
-                    <p>Close watch 👀</p>
-                    <p>More control</p>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">🌊</div>
-                    <h4>Wide Span</h4>
-                    <p>Boss manages MANY people</p>
-                    <p>Less watch 👓</p>
-                    <p>More freedom</p>
-                </div>
+            <div class="icon-item">
+                <span class="emoji">📚</span>
+                <div><strong>Practice</strong></div>
+                <div>Practice makes perfect!</div>
             </div>
+        </div>
 
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">👑</div>
-                    <h4>Centralization</h4>
-                    <p>TOP BOSS decides everything</p>
-                    <p>Like a king 👑</p>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">🤝</div>
-                    <h4>Decentralization</h4>
-                    <p>EVERYONE helps decide</p>
-                    <p>Like a team 🤝</p>
-                </div>
-            </div>
-
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">🔒</div>
-                    <h4>Mechanistic (Rigid)</h4>
-                    <p>Many rules 📋</p>
-                    <p>Strict 🔒</p>
-                    <p>Good for: Stable work</p>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">🔄</div>
-                    <h4>Organic (Flexible)</h4>
-                    <p>Few rules 🎯</p>
-                    <p>Flexible 🔄</p>
-                    <p>Good for: Changing work</p>
-                </div>
-            </div>
-
-            <div class="mnemonic">
-                💡 KEY RULE: Unity of Command = Each employee has ONLY ONE boss! No confusion! 🎯
-            </div>
-        </section>
-
-        <!-- Leadership Section -->
-        <section id="leadership" class="section">
-            <h2>👔 Leadership - Inspire People! ✨</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICK: Leadership = Influence people (not just authority) = Make them WANT to follow you! ✨
-            </div>
-
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">👔</div>
-                    <h4>Management</h4>
-                    <p>Uses POSITION power</p>
-                    <p>"I'm the boss!"</p>
-                    <p>Formal authority</p>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">⭐</div>
-                    <h4>Leadership</h4>
-                    <p>Uses INFLUENCE</p>
-                    <p>"Follow me!"</p>
-                    <p>Inspires people</p>
-                </div>
-            </div>
-
-            <div class="story-box">
-                <h3>📖 Simple Story:</h3>
-                <p><strong>Manager:</strong> "Do this because I'm your boss!" 👔</p>
-                <p><strong>Leader:</strong> "Let's do this together! We can do it!" ⭐</p>
-                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
-                    Leader = Makes people WANT to work! 😊
-                </p>
-            </div>
-
-            <div class="dimension-visual">
-                <div class="dim-card" data-icon="🧬">
-                    <h4>Trait Theory</h4>
-                    <p><strong>Leaders are BORN</strong> 🧬</p>
-                    <p>Like superpowers!</p>
-                    <ul style="text-align: left; margin-top: 15px;">
-                        <li>✅ Confident (Extraversion)</li>
-                        <li>✅ Responsible (Conscientiousness)</li>
-                        <li>✅ Creative (Openness)</li>
-                        <li>✅ Understand emotions (EI)</li>
-                    </ul>
-                </div>
-
-                <div class="dim-card" data-icon="📚">
-                    <h4>Behavioral Theory</h4>
-                    <p><strong>Leaders are MADE</strong> 📚</p>
-                    <p>Can learn it!</p>
-                    <p style="margin-top: 15px; font-size: 1.2rem;">
-                        Anyone can become a leader through training! 🎓
-                    </p>
-                </div>
-            </div>
-
-            <div class="visual-compare">
-                <div class="compare-card high">
-                    <div class="emoji-big">⭐</div>
-                    <h4>In-Group (Favorites)</h4>
-                    <p>Close to leader</p>
-                    <p>More trust 🤝</p>
-                    <p>More rewards 🎁</p>
-                    <p>More work</p>
-                </div>
-                <div class="compare-card low">
-                    <div class="emoji-big">👥</div>
-                    <h4>Out-Group (Others)</h4>
-                    <p>Formal relationship</p>
-                    <p>Less trust</p>
-                    <p>Fewer rewards</p>
-                    <p>Less work</p>
-                </div>
-            </div>
-
-            <div class="icon-grid">
-                <div class="icon-item">
-                    <span class="emoji">✨</span>
-                    <div><strong>Charismatic</strong></div>
-                    <div>Strong personality, inspires</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">🔄</span>
-                    <div><strong>Transformational</strong></div>
-                    <div>Changes people, motivates</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">🤝</span>
-                    <div><strong>Trust</strong></div>
-                    <div>Honest, fair, consistent</div>
-                </div>
-            </div>
-
-            <div class="mnemonic">
-                💡 TRUST = Honesty + Consistency + Competence = People follow you! 🤝
-            </div>
-        </section>
-
-        <!-- Controlling Section -->
-        <section id="controlling" class="section">
-            <h2>✅ Controlling - Check & Fix! 🔍</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICK: Controlling = "Measure → Compare → Fix" = Like checking homework! 📝
-            </div>
-
-            <div class="flowchart">
-                <div class="flow-box">📊 Measure Performance</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box">⚖️ Compare with Standard</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box">🔧 Take Action (Fix if needed)</div>
-            </div>
-
-            <div class="story-box">
-                <h3>📖 Simple Story:</h3>
-                <p><strong>Like checking if you studied enough:</strong></p>
-                <p>📊 <strong>Measure:</strong> How many hours did you study? (5 hours)</p>
-                <p>⚖️ <strong>Compare:</strong> Standard is 8 hours. You did 5. That's less!</p>
-                <p>🔧 <strong>Fix:</strong> Study 3 more hours to reach 8!</p>
-                <p style="margin-top: 15px; font-weight: bold; color: var(--primary);">
-                    That's controlling! Simple! 😊
-                </p>
-            </div>
-
-            <div class="visual-timeline">
-                <div class="timeline-step" data-number="1">
-                    <h4>📊 Step 1: Measure</h4>
-                    <p>Check actual work</p>
-                    <p>How: Watch, reports, numbers</p>
-                    <p>What: Sales, costs, quality</p>
-                </div>
-                <div class="timeline-step" data-number="2">
-                    <h4>⚖️ Step 2: Compare</h4>
-                    <p>Actual vs Standard</p>
-                    <p>Is it good or bad?</p>
-                    <p>How much difference?</p>
-                </div>
-                <div class="timeline-step" data-number="3">
-                    <h4>🔧 Step 3: Fix</h4>
-                    <p>If bad → Fix it!</p>
-                    <p>If good → Do nothing</p>
-                    <p>If standard wrong → Change it</p>
-                </div>
-            </div>
-
-            <div class="dimension-visual">
-                <div class="dim-card" data-icon="🛡️">
-                    <h4>Feedforward Control</h4>
-                    <p><strong>BEFORE work</strong> 🛡️</p>
-                    <p>Prevent problems</p>
-                    <p>Like checking car before trip</p>
-                </div>
-
-                <div class="dim-card" data-icon="👀">
-                    <h4>Concurrent Control</h4>
-                    <p><strong>DURING work</strong> 👀</p>
-                    <p>Watch while working</p>
-                    <p>Like teacher watching exam</p>
-                </div>
-
-                <div class="dim-card" data-icon="📝">
-                    <h4>Feedback Control</h4>
-                    <p><strong>AFTER work</strong> 📝</p>
-                    <p>Check results</p>
-                    <p>Like checking test score</p>
-                </div>
-            </div>
-
-            <div class="visual-card">
-                <h3>📈 Productivity Formula</h3>
-                <div class="big-text">
-                    Productivity = Output ÷ Input
-                </div>
-                <div class="icon-grid">
-                    <div class="icon-item">
-                        <span class="emoji">📤</span>
-                        <div><strong>Output</strong></div>
-                        <div>Sales, services</div>
-                    </div>
-                    <div class="icon-item">
-                        <span class="emoji">📥</span>
-                        <div><strong>Input</strong></div>
-                        <div>Labor, materials, costs</div>
-                    </div>
-                    <div class="icon-item">
-                        <span class="emoji">📊</span>
-                        <div><strong>Higher = Better</strong></div>
-                        <div>More efficient!</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="exam-visual">
-                <h4>📊 Balanced Scorecard - 4 Areas</h4>
-                <div class="icon-grid">
-                    <div class="icon-item">
-                        <span class="emoji">💰</span>
-                        <div><strong>Financial</strong></div>
-                    </div>
-                    <div class="icon-item">
-                        <span class="emoji">👥</span>
-                        <div><strong>Customer</strong></div>
-                    </div>
-                    <div class="icon-item">
-                        <span class="emoji">⚙️</span>
-                        <div><strong>Internal</strong></div>
-                    </div>
-                    <div class="icon-item">
-                        <span class="emoji">📈</span>
-                        <div><strong>Growth</strong></div>
-                    </div>
-                </div>
-                <p style="text-align: center; margin-top: 15px; font-weight: bold;">
-                    All 4 must be balanced! ⚖️
-                </p>
-            </div>
-        </section>
-
-        <!-- Exam Tips Section -->
-        <section id="exam" class="section">
-            <h2>📝 Exam Tips - Quick Memory! 🧠</h2>
-            
-            <div class="memory-box">
-                🧠 MEMORY TRICKS: Planning = What+How+When | Organizing = Who+What | Leadership = Influence | Controlling = Measure+Compare+Fix
-            </div>
-
-            <div class="exam-visual">
-                <h4>🎯 Direct Questions (Just Memorize!)</h4>
-                
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
-                    <p><strong>Q: Why planning important?</strong></p>
-                    <p>✅ Direction + Less confusion + Save money + Set standards</p>
-                </div>
-
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
-                    <p><strong>Q: Organizational structure elements?</strong></p>
-                    <p>✅ Work specialization + Departmentalization + Chain of command + Span of control</p>
-                </div>
-
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
-                    <p><strong>Q: Leadership vs Management?</strong></p>
-                    <p>✅ Management = Authority | Leadership = Influence</p>
-                </div>
-
-                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin: 15px 0;">
-                    <p><strong>Q: Control process?</strong></p>
-                    <p>✅ Measure → Compare → Fix</p>
-                </div>
-            </div>
-
-            <div class="visual-card">
-                <h3>🎭 Scenario Questions (Understand the Story!)</h3>
-                
-                <div class="story-box" style="margin: 15px 0;">
-                    <p><strong>Scenario 1:</strong> Employees confused, don't know who to report to</p>
-                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
-                        ✅ Answer: Missing chain of command
-                    </p>
-                </div>
-
-                <div class="story-box" style="margin: 15px 0;">
-                    <p><strong>Scenario 2:</strong> Manager checks work while it's being done</p>
-                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
-                        ✅ Answer: Concurrent control
-                    </p>
-                </div>
-
-                <div class="story-box" style="margin: 15px 0;">
-                    <p><strong>Scenario 3:</strong> Leader inspires with vision</p>
-                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
-                        ✅ Answer: Transformational leadership
-                    </p>
-                </div>
-
-                <div class="story-box" style="margin: 15px 0;">
-                    <p><strong>Scenario 4:</strong> Fast-changing environment, needs flexibility</p>
-                    <p style="color: var(--primary); font-weight: bold; margin-top: 10px;">
-                        ✅ Answer: Organic structure
-                    </p>
-                </div>
-            </div>
-
-            <div class="mnemonic">
-                💡 ONE-LINE SUMMARY:<br>
-                Planning = Roadmap 🗺️ | Organizing = Team Building 👥 | Leadership = Inspiration ⭐ | Controlling = Checking 📝
-            </div>
-
-            <div class="icon-grid">
-                <div class="icon-item">
-                    <span class="emoji">🗺️</span>
-                    <div><strong>Planning</strong></div>
-                    <div>What + How + When</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">👥</span>
-                    <div><strong>Organizing</strong></div>
-                    <div>Who + What</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">⭐</span>
-                    <div><strong>Leadership</strong></div>
-                    <div>Influence</div>
-                </div>
-                <div class="icon-item">
-                    <span class="emoji">📝</span>
-                    <div><strong>Controlling</strong></div>
-                    <div>Measure+Compare+Fix</div>
-                </div>
-            </div>
-        </section>
+        <div class="step-box" style="margin-top: 40px;">
+            🎉 <strong>CONGRATULATIONS!</strong> You've learned how to grade in Excel!<br>
+            You're no longer a beginner - you're an Excel user! 🌟
+        </div>
     </div>
 
     <script>
@@ -1312,14 +986,6 @@
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         document.getElementById('themeText').textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
     </script>
 </body>
 </html>
