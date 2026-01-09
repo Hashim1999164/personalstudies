@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SZABIST - IT & Computers Exam Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.1);
+            --shadow-hover: rgba(0, 217, 165, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #2D2D2D;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.2);
+            --shadow-hover: rgba(0, 217, 165, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--bg-primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--gradient);
+            color: white;
+            margin: 0 -15px 30px -15px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 0 5px;
+        }
+
+        .nav-btn {
+            background: var(--bg-primary);
+            color: var(--primary);
+            padding: 12px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            margin: 30px 0;
+            padding: clamp(25px, 4vw, 40px);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px var(--shadow);
+            display: none;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .question-box {
+            background: var(--bg-secondary);
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .question-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px var(--shadow-hover);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .options {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .option {
+            padding: 10px;
+            margin: 8px 0;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: var(--bg-secondary);
+            transform: translateX(5px);
+        }
+
+        .option.correct {
+            background: linear-gradient(135deg, #A8E6CF 0%, #55EFC4 100%);
+            border-color: var(--success);
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #D4F1F4 100%);
+            border: 3px solid var(--success);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            display: none;
+        }
+
+        [data-theme="dark"] .answer-box {
+            background: linear-gradient(135deg, #2A4A3A 0%, #3A5A5A 100%);
+        }
+
+        .answer-box.show {
+            display: block;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            color: var(--success);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .answer-text {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 1.8;
+        }
+
+        .toggle-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--shadow-hover);
+        }
+
+        .marking-scheme {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            border: 3px solid #FFA500;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        [data-theme="dark"] .marking-scheme {
+            background: linear-gradient(135deg, #4A4A2A 0%, #6B6B3A 100%);
+            color: #FFD700;
+        }
+
+        .short-answer {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .long-answer {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .points-list {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .points-list li {
+            margin: 10px 0;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .exam-info {
+            background: var(--gradient);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .exam-info h3 {
+            background: transparent;
+            color: white;
+            margin: 0 0 15px 0;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+    </button>
+
+    <header>
+        <h1>📚 SZABIST University</h1>
+        <p style="font-size: clamp(1rem, 3vw, 1.3rem); margin-top: 10px;">
+            Introduction to IT & Computers<br>
+            Complete Exam Guide with Questions & Answers
+        </p>
+    </header>
+
+    <div class="container">
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="showSection('mcq')">✅ MCQ</button>
+            <button class="nav-btn" onclick="showSection('short')">📝 Short Answer</button>
+            <button class="nav-btn" onclick="showSection('long')">📄 Long Answer</button>
+            <button class="nav-btn" onclick="showSection('scenario')">🎯 Scenario Based</button>
+        </nav>
+
+        <!-- MCQ Section -->
+        <section id="mcq" class="section active">
+            <h2>✅ Multiple Choice Questions (MCQs)</h2>
+
+            <div class="exam-info">
+                <h3>Instructions</h3>
+                <p>Select the correct answer. Click "Show Answer" to see the solution.</p>
+            </div>
+
+            <!-- MCQ 1 -->
+            <div class="question-box">
+                <span class="question-number">Q1</span>
+                <div class="question-text">
+                    What is a computer?
+                </div>
+                <div class="options">
+                    <div class="option">A) A machine that only displays information</div>
+                    <div class="option correct">B) An electronic machine that accepts input, processes it, and stores or outputs information</div>
+                    <div class="option">C) A device used only for playing games</div>
+                    <div class="option">D) A tool for printing documents</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans1')">Show Answer</button>
+                <div class="answer-box" id="ans1">
+                    <span class="answer-label">✅ Correct Answer: B</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> A computer is an electronic machine that accepts input (data), processes that input, and stores or outputs the resulting information. This is the fundamental definition of a computer system.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 2 -->
+            <div class="question-box">
+                <span class="question-number">Q2</span>
+                <div class="question-text">
+                    Which type of computer uses continuous signals?
+                </div>
+                <div class="options">
+                    <div class="option correct">A) Analog Computer</div>
+                    <div class="option">B) Digital Computer</div>
+                    <div class="option">C) Hybrid Computer</div>
+                    <div class="option">D) Personal Computer</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans2')">Show Answer</button>
+                <div class="answer-box" id="ans2">
+                    <span class="answer-label">✅ Correct Answer: A</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> Analog computers use continuous analog signals represented by varying voltages. They are used in scientific research centers. Digital computers use discrete steps and binary numbers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 3 -->
+            <div class="question-box">
+                <span class="question-number">Q3</span>
+                <div class="question-text">
+                    What does CPU stand for?
+                </div>
+                <div class="options">
+                    <div class="option">A) Computer Processing Unit</div>
+                    <div class="option correct">B) Central Processing Unit</div>
+                    <div class="option">C) Central Program Unit</div>
+                    <div class="option">D) Computer Program Unit</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans3')">Show Answer</button>
+                <div class="answer-box" id="ans3">
+                    <span class="answer-label">✅ Correct Answer: B</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> CPU stands for Central Processing Unit. It is the "brain" of the computer that contains electronic circuits to follow instructions and process information.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 4 -->
+            <div class="question-box">
+                <span class="question-number">Q4</span>
+                <div class="question-text">
+                    Which component of CPU performs arithmetic operations?
+                </div>
+                <div class="options">
+                    <div class="option correct">A) ALU (Arithmetic Logic Unit)</div>
+                    <div class="option">B) Control Unit</div>
+                    <div class="option">C) RAM</div>
+                    <div class="option">D) ROM</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans4')">Show Answer</button>
+                <div class="answer-box" id="ans4">
+                    <span class="answer-label">✅ Correct Answer: A</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> The ALU (Arithmetic Logic Unit) is where the "intelligence" of the computer is located. It can add, subtract, multiply, divide, and compare numbers. Processing is completed in nanoseconds.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 5 -->
+            <div class="question-box">
+                <span class="question-number">Q5</span>
+                <div class="question-text">
+                    How many bits make one byte?
+                </div>
+                <div class="options">
+                    <div class="option">A) 4 bits</div>
+                    <div class="option">B) 6 bits</div>
+                    <div class="option">C) 10 bits</div>
+                    <div class="option correct">D) 8 bits</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans5')">Show Answer</button>
+                <div class="answer-box" id="ans5">
+                    <span class="answer-label">✅ Correct Answer: D</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> 8 bits = 1 byte. Bits are grouped together in sets of eight. Each set of eight bits is called a byte, which represents one character.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 6 -->
+            <div class="question-box">
+                <span class="question-number">Q6</span>
+                <div class="question-text">
+                    What is the main difference between RAM and ROM?
+                </div>
+                <div class="options">
+                    <div class="option">A) RAM is permanent, ROM is temporary</div>
+                    <div class="option correct">B) RAM is temporary, ROM is permanent</div>
+                    <div class="option">C) Both are temporary</div>
+                    <div class="option">D) Both are permanent</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans6')">Show Answer</button>
+                <div class="answer-box" id="ans6">
+                    <span class="answer-label">✅ Correct Answer: B</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> RAM (Random Access Memory) is temporary memory that displays information you are working on. ROM (Read Only Memory) is permanent memory installed by the manufacturer that cannot be altered and determines basic functions like startup and shutdown.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 7 -->
+            <div class="question-box">
+                <span class="question-number">Q7</span>
+                <div class="question-text">
+                    Which generation of computers used vacuum tubes?
+                </div>
+                <div class="options">
+                    <div class="option correct">A) First Generation (1937-1953)</div>
+                    <div class="option">B) Second Generation (1954-1962)</div>
+                    <div class="option">C) Third Generation (1963-1972)</div>
+                    <div class="option">D) Fourth Generation (1972-1984)</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans7')">Show Answer</button>
+                <div class="answer-box" id="ans7">
+                    <span class="answer-label">✅ Correct Answer: A</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> First generation computers (1937-1953) were based on vacuum tubes, which were glass tubes that controlled and amplified electronic signals. They consumed high power, had limited performance, and were very expensive.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 8 -->
+            <div class="question-box">
+                <span class="question-number">Q8</span>
+                <div class="question-text">
+                    What is Information Technology (IT)?
+                </div>
+                <div class="options">
+                    <div class="option correct">A) Technology that helps produce, manipulate, store, communicate and disseminate information</div>
+                    <div class="option">B) Only computer hardware</div>
+                    <div class="option">C) Only software programs</div>
+                    <div class="option">D) Only internet services</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans8')">Show Answer</button>
+                <div class="answer-box" id="ans8">
+                    <span class="answer-label">✅ Correct Answer: A</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> Information Technology is the general term that describes any technology that helps to produce, manipulate, store, communicate and/or disseminate information. It includes both computer technology and communication technology.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 9 -->
+            <div class="question-box">
+                <span class="question-number">Q9</span>
+                <div class="question-text">
+                    Which type of computer is the most powerful?
+                </div>
+                <div class="options">
+                    <div class="option">A) Personal Computer</div>
+                    <div class="option">B) Mainframe</div>
+                    <div class="option correct">C) Super Computer</div>
+                    <div class="option">D) Workstation</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans9')">Show Answer</button>
+                <div class="answer-box" id="ans9">
+                    <span class="answer-label">✅ Correct Answer: C</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> Super computers are high capacity machines with thousands of processors that can perform more than several trillion calculations per second. They are the most powerful type of computer, used for complex scientific and research applications.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCQ 10 -->
+            <div class="question-box">
+                <span class="question-number">Q10</span>
+                <div class="question-text">
+                    What does ALU stand for?
+                </div>
+                <div class="options">
+                    <div class="option correct">A) Arithmetic Logic Unit</div>
+                    <div class="option">B) Advanced Logic Unit</div>
+                    <div class="option">C) Arithmetic Language Unit</div>
+                    <div class="option">D) Advanced Language Unit</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('ans10')">Show Answer</button>
+                <div class="answer-box" id="ans10">
+                    <span class="answer-label">✅ Correct Answer: A</span>
+                    <div class="answer-text">
+                        <strong>Explanation:</strong> ALU stands for Arithmetic Logic Unit. It is where the "intelligence" of the computer is located. It can add, subtract, multiply, divide, and compare numbers. It makes decisions by determining if a number is greater, less, or equal to another number.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Short Answer Section -->
+        <section id="short" class="section">
+            <h2>📝 Short Answer Questions</h2>
+
+            <div class="exam-info">
+                <h3>Instructions</h3>
+                <p>Answer in 2-4 sentences. Click "Show Answer" to see model answers.</p>
+            </div>
+
+            <!-- Short Q1 -->
+            <div class="question-box">
+                <span class="question-number">Q1</span>
+                <div class="question-text">
+                    Define a computer in your own words.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 2</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short1')">Show Answer</button>
+                <div class="answer-box" id="short1">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        A computer is an electronic machine that accepts input (data), processes that input, and stores or outputs the resulting information. It takes raw facts and figures, processes them into useful information that we can use. The computer follows instructions from programs to perform various tasks.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q2 -->
+            <div class="question-box">
+                <span class="question-number">Q2</span>
+                <div class="question-text">
+                    Differentiate between Analog and Digital computers.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 3</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short2')">Show Answer</button>
+                <div class="answer-box" id="short2">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>Analog Computers:</strong> Use continuous analog signals represented by varying voltages. They are used in scientific research centers. Example: Thermometer.<br><br>
+                        <strong>Digital Computers:</strong> Store data in terms of digits and process in discrete steps from one state to another. They use binary numbers (0 and 1). Letters and words are represented in digital formats. Example: Personal computers, laptops.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q3 -->
+            <div class="question-box">
+                <span class="question-number">Q3</span>
+                <div class="question-text">
+                    What are the three main parts of CPU? Explain briefly.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 3</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short3')">Show Answer</button>
+                <div class="answer-box" id="short3">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>1. ALU (Arithmetic Logic Unit):</strong> Performs arithmetic operations (add, subtract, multiply, divide) and logical comparisons. It is where the computer's intelligence is located.<br><br>
+                        <strong>2. Memory:</strong> Consists of RAM (temporary memory for current work) and ROM (permanent memory installed by manufacturer for basic functions).<br><br>
+                        <strong>3. Control Unit:</strong> Directs information flow to proper places in the computer, such as to ALU for calculations or to storage devices.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q4 -->
+            <div class="question-box">
+                <span class="question-number">Q4</span>
+                <div class="question-text">
+                    Explain the difference between RAM and ROM.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 3</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short4')">Show Answer</button>
+                <div class="answer-box" id="short4">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>RAM (Random Access Memory):</strong> Temporary memory that displays information you are working on. It remembers what you see on screen while working. Data is lost when computer turns off. Can be upgraded.<br><br>
+                        <strong>ROM (Read Only Memory):</strong> Permanent memory installed by manufacturer that cannot be altered. It determines all basic functions like startup, shutdown, and placing characters on screen. Never changes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q5 -->
+            <div class="question-box">
+                <span class="question-number">Q5</span>
+                <div class="question-text">
+                    What is Information Technology? Give examples.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 3</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short5')">Show Answer</button>
+                <div class="answer-box" id="short5">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        Information Technology is the general term that describes any technology that helps to produce, manipulate, store, communicate and/or disseminate information. It merges computing with high-speed communications links carrying data, sound and video.<br><br>
+                        <strong>Examples:</strong> Telephones, Televisions, Appliances, Various Handheld Devices, Internet, Computers, Cell Phones, Email.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q6 -->
+            <div class="question-box">
+                <span class="question-number">Q6</span>
+                <div class="question-text">
+                    List the five components of a computer system.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 2.5</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short6')">Show Answer</button>
+                <div class="answer-box" id="short6">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>1. Hardware:</strong> Electronic components (CPU, storage devices, input/output devices)<br>
+                        <strong>2. Software:</strong> Programs that tell computer what to do<br>
+                        <strong>3. User:</strong> Person who interacts with the computer<br>
+                        <strong>4. Procedures:</strong> User manuals indicating how to use computers safely and effectively<br>
+                        <strong>5. Data:</strong> Collection of numbers, characters, images, audio, video content that can be processed by computer
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q7 -->
+            <div class="question-box">
+                <span class="question-number">Q7</span>
+                <div class="question-text">
+                    What is the difference between System Software and Application Software?
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 3</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short7')">Show Answer</button>
+                <div class="answer-box" id="short7">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>System Software:</strong> Makes computer work. Includes Operating System that coordinates all activities among computer's hardware devices. Examples: Windows, Mac OS, Linux.<br><br>
+                        <strong>Application Software:</strong> Programs that perform specific tasks for users. Examples: Word Processors (MS Word), Spreadsheets (MS Excel), Email (Gmail), Presentation (PowerPoint), Web Browsers (Chrome), Database Management (MS Access).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Short Q8 -->
+            <div class="question-box">
+                <span class="question-number">Q8</span>
+                <div class="question-text">
+                    Explain the basic operations of a computer.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 2.5</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('short8')">Show Answer</button>
+                <div class="answer-box" id="short8">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>1. Input Operation:</strong> Data enters the computer through input devices<br>
+                        <strong>2. Processing Operation:</strong> CPU processes the data<br>
+                        <strong>3. Storage Operation:</strong> Data is stored in memory or storage devices<br>
+                        <strong>4. Output Operation:</strong> Processed information is displayed or printed<br>
+                        <strong>5. Communications Operation:</strong> Data can be sent to other computers through networks
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Long Answer Section -->
+        <section id="long" class="section">
+            <h2>📄 Long Answer Questions</h2>
+
+            <div class="exam-info">
+                <h3>Instructions</h3>
+                <p>Answer in detail with examples. Click "Show Answer" to see comprehensive model answers.</p>
+            </div>
+
+            <!-- Long Q1 -->
+            <div class="question-box">
+                <span class="question-number">Q1</span>
+                <div class="question-text">
+                    Explain the history and generations of computers in detail. Discuss the key features of each generation.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('long1')">Show Answer</button>
+                <div class="answer-box" id="long1">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>Mechanical Era (1623-1900):</strong><br>
+                        - Abacus (3000 BC): Wooden beads for addition, subtraction, division, multiplication<br>
+                        - Napier's Bone (17th Century): Cupboard multiplication calculator<br>
+                        - Pascaline (17th Century): First mechanical adding machine with wheels<br><br>
+
+                        <strong>First Generation (1937-1953):</strong><br>
+                        - Based on vacuum tubes (glass tubes controlling electronic signals)<br>
+                        - High power consumption, limited performance, very expensive<br>
+                        - Used assembly language, translated to machine language<br>
+                        - Punch cards and paper tape for input<br>
+                        - Magnetic tapes and drums for secondary memory<br>
+                        - Mainly used for scientific computation<br><br>
+
+                        <strong>Second Generation (1954-1962):</strong><br>
+                        - Bell Labs invented transistor (transfers electronic signals)<br>
+                        - Lower cost than first generation<br>
+                        - Magnetic tapes and magnetic disks as secondary memory<br>
+                        - Languages: FORTRAN, COBOL<br>
+                        - Separate input-output processors operating in parallel with CPU<br><br>
+
+                        <strong>Third Generation (1963-1972):</strong><br>
+                        - Jack Kilby developed Integrated Circuits (IC) - several components on silicon chip<br>
+                        - IBM introduced 360 system<br>
+                        - Smaller size, faster processor, better performance, lower cost<br>
+                        - RAM and ROM replaced magnetic core memories<br>
+                        - Operating Systems and Multi-programming introduced<br>
+                        - Cache and virtual memories introduced<br><br>
+
+                        <strong>Fourth Generation (1972-1984):</strong><br>
+                        - Microprocessors introduced as CPU (tens of thousands of transistors on chip)<br>
+                        - Semiconductor memory chips as main memory<br>
+                        - Secondary memory: floppy and magnetic tapes<br>
+                        - LANs and WANs introduced<br>
+                        - Languages: C, Graphical user interface<br>
+                        - Apple and IBM computers<br><br>
+
+                        <strong>Fifth Generation (1984-1990):</strong><br>
+                        - Computers based on Artificial Intelligence/quantum computing<br>
+                        - Parallel processing and multi-processors<br><br>
+
+                        <strong>Sixth Generation (1990-Present):</strong><br>
+                        - Intel Pentium (55 million transistors on single chip)<br>
+                        - Memory chips up to 1GB, hard drives up to 180GB<br>
+                        - Languages: JAVA<br>
+                        - Windows 95, 98, Linux developed<br>
+                        - Inventions: WWW, HTML, HTTP, DVD, iPod, YouTube
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long Q2 -->
+            <div class="question-box">
+                <span class="question-number">Q2</span>
+                <div class="question-text">
+                    Discuss the Central Processing Unit (CPU) in detail. Explain its components and functions.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('long2')">Show Answer</button>
+                <div class="answer-box" id="long2">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>Introduction:</strong><br>
+                        The Central Processing Unit (CPU) is the "brain" of the computer. It contains electronic circuits that cause the computer to follow instructions from ROM or from programs in RAM. By following these instructions, information is processed.<br><br>
+
+                        <strong>Three Main Components:</strong><br><br>
+
+                        <strong>1. Arithmetic Logic Unit (ALU):</strong><br>
+                        - Where the "intelligence" of the computer is located<br>
+                        - Can add and compare numbers<br>
+                        - To multiply 2 × 4, computer adds 2 + 2 + 2 + 2<br>
+                        - Makes decisions by determining if a number is greater, less, or equal to another number<br>
+                        - Processing completed in nanoseconds (billionth of a second)<br><br>
+
+                        <strong>2. Memory:</strong><br>
+                        Two types contained on a chip:<br>
+                        - <strong>RAM (Random Access Memory):</strong> Temporary memory that displays information you are working on. Remembers what you see on screen. Can be upgraded.<br>
+                        - <strong>ROM (Read Only Memory):</strong> Permanent memory installed by manufacturer. Cannot be altered. Determines basic functions like startup, shutdown, placing characters on screen.<br><br>
+
+                        <strong>3. Control Unit:</strong><br>
+                        - Directs information to proper places in computer<br>
+                        - Sends information to ALU for calculations<br>
+                        - Sends information to memory for storage<br>
+                        - Sends information to printer for printing<br>
+                        - Sends information to screen for display<br>
+                        - Acts like a traffic controller<br><br>
+
+                        <strong>Function:</strong><br>
+                        The CPU processes all instructions and performs calculations, making it the most important component of the computer system.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long Q3 -->
+            <div class="question-box">
+                <span class="question-number">Q3</span>
+                <div class="question-text">
+                    Explain Information Technology and its impact on various sectors of society. Provide examples.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('long3')">Show Answer</button>
+                <div class="answer-box" id="long3">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>Definition of IT:</strong><br>
+                        Information Technology is the general term that describes any technology that helps to produce, manipulate, store, communicate and/or disseminate information. It merges computing with high-speed communications links carrying data, sound and video. The world has become a global village due to IT advancement.<br><br>
+
+                        <strong>Two Parts of IT:</strong><br>
+                        1. <strong>Computer Technology:</strong> Programmable, multiuse machine that processes data into information<br>
+                        2. <strong>Communication Technology:</strong> Electromagnetic devices for long-distance communication<br><br>
+
+                        <strong>Impact on Workplace:</strong><br>
+                        - Improved productivity<br>
+                        - Improved efficiency<br>
+                        - Reduced costs<br>
+                        - Enhanced customer services<br><br>
+
+                        <strong>Impact on Consumers:</strong><br>
+                        - Changed how consumers make purchases (online shopping)<br>
+                        - Changed how consumers use services<br>
+                        - Changed how consumers plan vacations<br>
+                        - Changed how consumers obtain entertainment<br><br>
+
+                        <strong>IT in Education:</strong><br>
+                        - E-mail for communication<br>
+                        - Course management software<br>
+                        - Distance learning<br>
+                        - Avatars for virtual learning<br><br>
+
+                        <strong>IT in Health and Medicine:</strong><br>
+                        - Telemedicine (remote medical consultations)<br>
+                        - Robots for surgery and patient care<br><br>
+
+                        <strong>IT in Finance:</strong><br>
+                        - Virtual money (digital money)<br>
+                        - Micro credits (small loans)<br>
+                        - Micro-payments (small payments)<br><br>
+
+                        <strong>IT in Entertainment:</strong><br>
+                        - Satellite Television<br>
+                        - Online Television and streaming<br><br>
+
+                        <strong>IT in Government and Politics:</strong><br>
+                        - Connection with voters<br>
+                        - Electronic polling<br>
+                        - Three-step balloting<br>
+                        - Online public complaints<br><br>
+
+                        <strong>Career Applications:</strong><br>
+                        Hotel Management, Law Enforcement, Hospital management, Entertainment, Education, Small and Medium Enterprise, Large Industries, Customer management, Management Information Systems<br><br>
+
+                        <strong>Pervasive IT:</strong><br>
+                        IT is everywhere - Internet, Computers, Cell Phones, Email. The trend is towards increasingly ubiquitous connected computing, sensors, devices, and networks.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long Q4 -->
+            <div class="question-box">
+                <span class="question-number">Q4</span>
+                <div class="question-text">
+                    Discuss the different categories of computers. Explain their characteristics, uses, and provide examples.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('long4')">Show Answer</button>
+                <div class="answer-box" id="long4">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>1. Personal Computers (PCs):</strong><br>
+                        - Also called microcomputers<br>
+                        - Cost: $500 to over $5000<br>
+                        - Fits on a table, can be carried around<br>
+                        - Used by individuals for personal and professional tasks<br>
+                        - Examples: Desktop computers, laptops<br><br>
+
+                        <strong>2. Mobile Computers:</strong><br>
+                        - Portable computers<br>
+                        - Can be carried easily<br>
+                        - Examples: Laptops, notebooks<br><br>
+
+                        <strong>3. Mobile Devices:</strong><br>
+                        - Small handheld devices<br>
+                        - Examples: Smartphones, tablets<br><br>
+
+                        <strong>4. Game Consoles:</strong><br>
+                        - Specialized for gaming<br>
+                        - Examples: PlayStation, Xbox<br><br>
+
+                        <strong>5. Servers/Network Servers:</strong><br>
+                        - Central computer that holds collection of data and programs<br>
+                        - Supplies services to PCs, workstations, and other devices (clients)<br>
+                        - Clients linked by wired or wireless network<br>
+                        - Entire network called client/server network<br><br>
+
+                        <strong>6. Mainframes:</strong><br>
+                        - Water or air-cooled computers<br>
+                        - Cost: $5,000 to $5 million<br>
+                        - Vary in sizes from small to medium to large<br>
+                        - Used by large organizations<br>
+                        - Examples: IBM mainframes<br><br>
+
+                        <strong>7. Super Computers:</strong><br>
+                        - High capacity machines with thousands of processors<br>
+                        - Can perform more than several trillion calculations per second<br>
+                        - Used for complex scientific and research applications<br>
+                        - Examples: Cray supercomputers<br><br>
+
+                        <strong>8. Embedded Computers (Microcontrollers):</strong><br>
+                        - Tiny, specialized microprocessors<br>
+                        - Installed in "smart" appliances and automobiles<br>
+                        - Examples: Smart TVs, smart refrigerators, car computers<br><br>
+
+                        <strong>9. Workstations:</strong><br>
+                        - Expensive, powerful personal computers<br>
+                        - Used for complex scientific, mathematical, and engineering calculations<br>
+                        - Used for computer aided design (CAD) and computer aided manufacturing (CAM)<br>
+                        - Examples: Engineering workstations
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long Q5 -->
+            <div class="question-box">
+                <span class="question-number">Q5</span>
+                <div class="question-text">
+                    Explain computer storage devices and data measurement units in detail.
+                </div>
+                <div class="marking-scheme">
+                    <strong>Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('long5')">Show Answer</button>
+                <div class="answer-box" id="long5">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>Storage Devices:</strong><br>
+                        A storage device is a hardware component that keeps data, information and program instructions permanently. There are many types of storage devices available in a range of capacities. Some are portable and some are not.<br><br>
+
+                        <strong>Types of Storage:</strong><br><br>
+
+                        <strong>1. Primary/Internal Storage:</strong><br>
+                        - Internal storage device<br>
+                        - Not portable<br>
+                        - Not usually visible unless system unit is open<br>
+                        - Very fast access<br>
+                        - Examples: Hard drive inside computer<br><br>
+
+                        <strong>2. Secondary Storage:</strong><br>
+                        - External storage devices<br>
+                        - Portable<br>
+                        - Can be seen and removed<br>
+                        - Keeps data when computer is turned off<br>
+                        - Examples: USB flash drives, CD, DVD, external hard drives<br><br>
+
+                        <strong>3. USB and FireWire Ports:</strong><br>
+                        - Provide connection technology for attaching peripheral devices<br>
+                        - Enable data exchange<br><br>
+
+                        <strong>Data Storage Units:</strong><br>
+                        Computer stores data in units called bits and bytes. Computer chips have one of two states: off or on. Therefore, a system was developed using only two numbers: 0 (off) and 1 (on). Each switch is called a bit. Bits are grouped together in sets of eight. Each set of eight bits is called a byte. Setting different combinations of those eight "on and off" combinations can stand for letters, numbers, spaces, and symbols. For practical purposes, think of a byte as one character.<br><br>
+
+                        <strong>Measurement Units:</strong><br>
+                        - <strong>8 bits = 1 byte</strong> (represents one character)<br>
+                        - <strong>1024 bytes = 1 Kilobyte (KB)</strong> (approximately 1 page of text)<br>
+                        - <strong>1024 Kilobytes = 1 Megabyte (MB)</strong> (approximately 1 song)<br>
+                        - <strong>1024 Megabytes = 1 Gigabyte (GB)</strong> (approximately 1 movie)<br>
+                        - <strong>1024 Gigabytes = 1 Terabyte (TB)</strong> (approximately 1000 movies)<br><br>
+
+                        <strong>Examples:</strong><br>
+                        - A text document might be 50 KB<br>
+                        - A song might be 5 MB<br>
+                        - A movie might be 1 GB<br>
+                        - A hard drive might be 500 GB or 1 TB
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scenario Based Section -->
+        <section id="scenario" class="section">
+            <h2>🎯 Scenario-Based Questions</h2>
+
+            <div class="exam-info">
+                <h3>Instructions</h3>
+                <p>Read the scenario carefully and answer the questions. These test your understanding and application of concepts.</p>
+            </div>
+
+            <!-- Scenario 1 -->
+            <div class="question-box">
+                <span class="question-number">Scenario 1</span>
+                <div class="question-text">
+                    A company needs to process millions of transactions per second and requires the most powerful computing system available. They need to analyze complex scientific data and run simulations that require trillions of calculations per second.
+                </div>
+                <div class="question-text" style="margin-top: 20px;">
+                    <strong>Questions:</strong><br>
+                    a) What type of computer would you recommend? (2 marks)<br>
+                    b) Explain why this type is suitable. (3 marks)<br>
+                    c) Give two characteristics of this computer type. (2 marks)
+                </div>
+                <div class="marking-scheme">
+                    <strong>Total Marks: 7</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('scenario1')">Show Answer</button>
+                <div class="answer-box" id="scenario1">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>a) Recommended Computer Type:</strong><br>
+                        Super Computer<br><br>
+
+                        <strong>b) Why Suitable:</strong><br>
+                        - Super computers are high capacity machines with thousands of processors<br>
+                        - Can perform more than several trillion calculations per second<br>
+                        - Designed for complex scientific computations and data analysis<br>
+                        - Can handle massive amounts of data processing simultaneously<br>
+                        - Used for research, simulations, and complex calculations<br><br>
+
+                        <strong>c) Two Characteristics:</strong><br>
+                        1. Has thousands of processors working together<br>
+                        2. Can perform trillions of calculations per second<br>
+                        3. Very expensive and large in size<br>
+                        4. Used primarily for scientific and research applications
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="question-box">
+                <span class="question-number">Scenario 2</span>
+                <div class="question-text">
+                    A student is working on a document in Microsoft Word. When they type, the text appears on the screen. However, when they turn off the computer without saving, all their work is lost.
+                </div>
+                <div class="question-text" style="margin-top: 20px;">
+                    <strong>Questions:</strong><br>
+                    a) Which type of memory was storing the document while the student was typing? (1 mark)<br>
+                    b) Why was the work lost when the computer was turned off? (2 marks)<br>
+                    c) What should the student have done to prevent data loss? (2 marks)
+                </div>
+                <div class="marking-scheme">
+                    <strong>Total Marks: 5</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('scenario2')">Show Answer</button>
+                <div class="answer-box" id="scenario2">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>a) Type of Memory:</strong><br>
+                        RAM (Random Access Memory)<br><br>
+
+                        <strong>b) Why Work Was Lost:</strong><br>
+                        - RAM is temporary memory that stores data only while the computer is on<br>
+                        - RAM remembers what you see on screen while working<br>
+                        - When computer turns off, all data in RAM is lost because it is volatile memory<br>
+                        - The document was not saved to permanent storage (hard drive)<br><br>
+
+                        <strong>c) How to Prevent Data Loss:</strong><br>
+                        1. Save the document frequently (every few minutes) using Ctrl+S or File → Save<br>
+                        2. Save to hard drive or secondary storage (USB, cloud storage)<br>
+                        3. Enable auto-save feature if available<br>
+                        4. Always save before closing the program or turning off computer
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="question-box">
+                <span class="question-number">Scenario 3</span>
+                <div class="question-text">
+                    A research laboratory needs a computer system to measure continuous temperature changes in an experiment. The temperature readings need to be represented as smooth, continuous values rather than discrete steps.
+                </div>
+                <div class="question-text" style="margin-top: 20px;">
+                    <strong>Questions:</strong><br>
+                    a) What type of computer would be most suitable? (2 marks)<br>
+                    b) Explain the difference between this type and digital computers. (3 marks)
+                </div>
+                <div class="marking-scheme">
+                    <strong>Total Marks: 5</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('scenario3')">Show Answer</button>
+                <div class="answer-box" id="scenario3">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>a) Suitable Computer Type:</strong><br>
+                        Analog Computer (or Hybrid Computer)<br><br>
+
+                        <strong>b) Difference from Digital Computers:</strong><br>
+                        <strong>Analog Computers:</strong><br>
+                        - Use continuous analog signals<br>
+                        - Represented by varying voltages<br>
+                        - Smooth, continuous values (like a wave)<br>
+                        - Used in scientific research centers<br>
+                        - Example: Thermometer, speedometer<br><br>
+
+                        <strong>Digital Computers:</strong><br>
+                        - Store data in terms of digits<br>
+                        - Process in discrete steps from one state to another<br>
+                        - Use binary numbers (0 and 1)<br>
+                        - Letters and words represented in digital formats<br>
+                        - Example: Personal computers, laptops<br><br>
+
+                        <strong>Key Difference:</strong> Analog uses continuous signals (smooth), while digital uses discrete steps (on/off, 0/1).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 4 -->
+            <div class="question-box">
+                <span class="question-number">Scenario 4</span>
+                <div class="question-text">
+                    A large bank needs a computer system to handle millions of customer transactions daily. The system must be reliable, secure, and able to process data for thousands of users simultaneously. It should cost between $100,000 to $1 million.
+                </div>
+                <div class="question-text" style="margin-top: 20px;">
+                    <strong>Questions:</strong><br>
+                    a) What type of computer system would you recommend? (2 marks)<br>
+                    b) Explain three reasons for your recommendation. (6 marks)<br>
+                    c) What is a client/server network in this context? (2 marks)
+                </div>
+                <div class="marking-scheme">
+                    <strong>Total Marks: 10</strong>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('scenario4')">Show Answer</button>
+                <div class="answer-box" id="scenario4">
+                    <span class="answer-label">✅ Model Answer:</span>
+                    <div class="answer-text">
+                        <strong>a) Recommended System:</strong><br>
+                        Mainframe Computer System with Client/Server Network<br><br>
+
+                        <strong>b) Three Reasons:</strong><br>
+                        1. <strong>Capacity and Performance:</strong> Mainframes are designed to handle massive amounts of data and transactions. They can process data for thousands of users simultaneously, which is essential for a large bank.<br><br>
+                        2. <strong>Reliability and Security:</strong> Mainframes are highly reliable systems with built-in redundancy and security features. Banks require systems that rarely fail and protect sensitive financial data.<br><br>
+                        3. <strong>Cost Range:</strong> Mainframes cost between $5,000 to $5 million, which fits the bank's budget of $100,000 to $1 million. They provide excellent value for large-scale operations.<br><br>
+                        4. <strong>Scalability:</strong> Mainframes can be configured in various sizes (small to medium to large) depending on needs, and can be upgraded as the bank grows.<br><br>
+
+                        <strong>c) Client/Server Network:</strong><br>
+                        - A network where a central computer (server) holds collection of data and programs<br>
+                        - The server supplies services to PCs, workstations, and other devices (called clients)<br>
+                        - Clients are linked by wired or wireless network<br>
+                        - The entire network is called a client/server network<br>
+                        - In the bank's case: Mainframe acts as server, bank employees' computers and ATMs act as clients
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('themeText').textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAnswer(answerId) {
+            const answerBox = document.getElementById(answerId);
+            answerBox.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
