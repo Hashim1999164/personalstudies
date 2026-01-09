@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete IT & Computers Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.1);
+            --shadow-hover: rgba(0, 217, 165, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --primary: #00D9A5;
+            --primary-dark: #00B894;
+            --secondary: #00CEC9;
+            --accent: #55EFC4;
+            --warning: #FDCB6E;
+            --error: #E17055;
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #2D2D2D;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --gradient: linear-gradient(135deg, #00D9A5 0%, #00CEC9 100%);
+            --shadow: rgba(0, 217, 165, 0.2);
+            --shadow-hover: rgba(0, 217, 165, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--bg-primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--gradient);
+            color: white;
+            margin: 0 -15px 30px -15px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 0 5px;
+        }
+
+        .nav-btn {
+            background: var(--bg-primary);
+            color: var(--primary);
+            padding: 12px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            margin: 30px 0;
+            padding: clamp(25px, 4vw, 40px);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px var(--shadow);
+            display: none;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .section h4 {
+            color: var(--accent);
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin: 25px 0 15px 0;
+        }
+
+        .memory-box {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            border: 3px solid #FFA500;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: bold;
+            color: #8B4513;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        [data-theme="dark"] .memory-box {
+            background: linear-gradient(135deg, #4A4A2A 0%, #6B6B3A 100%);
+            color: #FFD700;
+            border-color: #FFA500;
+        }
+
+        .visual-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px var(--shadow-hover);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .icon-item {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover {
+            transform: scale(1.05);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .icon-item .emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .compare-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .compare-card:hover {
+            transform: scale(1.05);
+        }
+
+        .compare-card.type1 {
+            background: linear-gradient(135deg, #00D9A5 0%, #00B894 100%);
+            color: white;
+        }
+
+        .compare-card.type2 {
+            background: linear-gradient(135deg, #00CEC9 0%, #55EFC4 100%);
+            color: white;
+        }
+
+        .compare-card.type3 {
+            background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
+            color: white;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+        }
+
+        .flow-box {
+            background: var(--gradient);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            min-width: 250px;
+            max-width: 100%;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .timeline-visual {
+            position: relative;
+            padding: 30px 0;
+            margin: 30px 0;
+        }
+
+        .timeline-visual::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 30px 0;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-left: 80px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .timeline-item::before {
+            content: attr(data-number);
+            position: absolute;
+            left: -65px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .big-emoji {
+            font-size: 6rem;
+            text-align: center;
+            margin: 30px 0;
+            display: block;
+        }
+
+        .formula-box {
+            background: #2D3436;
+            color: #00D9A5;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        [data-theme="dark"] .formula-box {
+            background: #1A1A1A;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #D4F1F4 100%);
+            border: 3px dashed var(--primary);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: bold;
+        }
+
+        [data-theme="dark"] .highlight-box {
+            background: linear-gradient(135deg, #2A4A3A 0%, #3A5A5A 100%);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFD700 100%);
+            border: 3px solid #FFA500;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #A8E6CF 0%, #55EFC4 100%);
+            border: 3px solid var(--success);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .table-visual {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            background: var(--bg-primary);
+        }
+
+        .table-visual th {
+            background: var(--gradient);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            border: 2px solid var(--primary);
+        }
+
+        .table-visual td {
+            padding: 12px;
+            border: 1px solid var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        .simple-text {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            line-height: 2;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin: 15px 0;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-visual::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                margin-left: 60px;
+            }
+
+            .timeline-item::before {
+                left: -45px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+
+            .flowchart {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+    </button>
+
+    <header>
+        <h1>💻 Complete IT & Computers Study Guide</h1>
+        <p style="font-size: clamp(1rem, 3vw, 1.3rem); margin-top: 10px;">Super Visual - Super Easy - For Everyone! 🎯</p>
+    </header>
+
+    <div class="container">
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="showSection('whatis')">💻 What is Computer</button>
+            <button class="nav-btn" onclick="showSection('types')">🔀 Types</button>
+            <button class="nav-btn" onclick="showSection('components')">🧩 Components</button>
+            <button class="nav-btn" onclick="showSection('cpu')">🧠 CPU</button>
+            <button class="nav-btn" onclick="showSection('storage')">💾 Storage</button>
+            <button class="nav-btn" onclick="showSection('software')">📱 Software</button>
+            <button class="nav-btn" onclick="showSection('it')">🌐 IT</button>
+            <button class="nav-btn" onclick="showSection('history')">📜 History</button>
+            <button class="nav-btn" onclick="showSection('categories')">🏢 Categories</button>
+        </nav>
+
+        <!-- What is Computer -->
+        <section id="whatis" class="section active">
+            <h2>💻 What is a Computer?</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: Computer = Electronic Machine that takes INPUT → PROCESSES → gives OUTPUT
+            </div>
+
+            <div class="big-emoji">🖥️</div>
+
+            <div class="simple-text">
+                A computer is an <strong>electronic machine</strong><br>
+                that <strong>accepts input</strong> (data),<br>
+                <strong>processes</strong> that input,<br>
+                and <strong>stores or outputs</strong> the information! ✨
+            </div>
+
+            <div class="flowchart">
+                <div class="flow-box">📥 INPUT<br>Data goes IN</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">⚙️ PROCESSING<br>Computer thinks</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">💾 STORAGE<br>Save it</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box">📤 OUTPUT<br>Show result</div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📖 Simple Example:</h3>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">⌨️</span>
+                        <div><strong>You Type</strong></div>
+                        <div>INPUT</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🧠</span>
+                        <div><strong>Computer Thinks</strong></div>
+                        <div>PROCESS</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">💾</span>
+                        <div><strong>Computer Saves</strong></div>
+                        <div>STORAGE</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🖥️</span>
+                        <div><strong>You See Result</strong></div>
+                        <div>OUTPUT</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Computers -->
+        <section id="types" class="section">
+            <h2>🔀 Types of Computers</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: 3 Types = Analog (continuous) | Digital (discrete) | Hybrid (both)
+            </div>
+
+            <div class="comparison-box">
+                <div class="compare-card type1">
+                    <div class="big-emoji" style="font-size: 4rem;">📊</div>
+                    <h3>Analog Computers</h3>
+                    <p><strong>Uses:</strong> Continuous signals</p>
+                    <p><strong>Like:</strong> Smooth wave 🌊</p>
+                    <p><strong>Used in:</strong> Scientific research</p>
+                    <p><strong>Example:</strong> Thermometer 🌡️</p>
+                </div>
+
+                <div class="compare-card type2">
+                    <div class="big-emoji" style="font-size: 4rem;">💻</div>
+                    <h3>Digital Computers</h3>
+                    <p><strong>Uses:</strong> Discrete steps</p>
+                    <p><strong>Like:</strong> Steps on stairs 📶</p>
+                    <p><strong>Uses:</strong> Binary (0 and 1)</p>
+                    <p><strong>Example:</strong> Your laptop 💻</p>
+                </div>
+
+                <div class="compare-card type3">
+                    <div class="big-emoji" style="font-size: 4rem;">🔀</div>
+                    <h3>Hybrid Computers</h3>
+                    <p><strong>Uses:</strong> Both types!</p>
+                    <p><strong>Like:</strong> Best of both 🌟</p>
+                    <p><strong>Has:</strong> Analog + Digital</p>
+                    <p><strong>Example:</strong> Medical equipment 🏥</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎯 Quick Comparison:</h3>
+                <table class="table-visual">
+                    <tr>
+                        <th>Type</th>
+                        <th>How It Works</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>📊 Analog</td>
+                        <td>Continuous (smooth)</td>
+                        <td>Thermometer</td>
+                    </tr>
+                    <tr>
+                        <td>💻 Digital</td>
+                        <td>Discrete (steps)</td>
+                        <td>Laptop, Phone</td>
+                    </tr>
+                    <tr>
+                        <td>🔀 Hybrid</td>
+                        <td>Both together</td>
+                        <td>Medical machines</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components" class="section">
+            <h2>🧩 Components of Computer System</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: 5 Parts = Hardware + Software + User + Procedures + Data
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">🔧</span>
+                    <div><strong>Hardware</strong></div>
+                    <div>Physical parts<br>You can touch! 👆</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📱</span>
+                    <div><strong>Software</strong></div>
+                    <div>Programs<br>Tell computer what to do</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">👤</span>
+                    <div><strong>User</strong></div>
+                    <div>Person<br>Who uses computer</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📖</span>
+                    <div><strong>Procedures</strong></div>
+                    <div>Instructions<br>How to use</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📊</span>
+                    <div><strong>Data</strong></div>
+                    <div>Information<br>Numbers, text, images</div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🔧 Hardware - Physical Parts</h3>
+                <div class="comparison-box">
+                    <div class="compare-card type1">
+                        <h4>📥 INPUT Devices</h4>
+                        <ul style="text-align: left; margin-top: 15px;">
+                            <li>⌨️ Keyboard</li>
+                            <li>🖱️ Mouse</li>
+                            <li>🎤 Microphone</li>
+                            <li>📷 Camera</li>
+                            <li>📸 Scanner</li>
+                            <li>👆 Touch Screen</li>
+                        </ul>
+                    </div>
+                    <div class="compare-card type2">
+                        <h4>📤 OUTPUT Devices</h4>
+                        <ul style="text-align: left; margin-top: 15px;">
+                            <li>🖨️ Printer</li>
+                            <li>🔊 Speakers</li>
+                            <li>🖥️ Monitor</li>
+                            <li>📽️ Projector</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                💡 <strong>Think of it like this:</strong><br>
+                Hardware = Body (you can see and touch) 👀👆<br>
+                Software = Brain (tells body what to do) 🧠
+            </div>
+        </section>
+
+        <!-- CPU -->
+        <section id="cpu" class="section">
+            <h2>🧠 Central Processing Unit (CPU)</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: CPU = Brain of Computer | Has 3 Parts = ALU + Memory + Control Unit
+            </div>
+
+            <div class="big-emoji">🧠</div>
+
+            <div class="simple-text">
+                CPU = <strong>BRAIN</strong> of your computer! 🧠<br>
+                It makes everything work! ⚙️
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">➕</span>
+                    <div><strong>ALU</strong></div>
+                    <div>Arithmetic Logic Unit<br>Does math! ➕➖✖️➗</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">💾</span>
+                    <div><strong>Memory</strong></div>
+                    <div>RAM (temporary)<br>ROM (permanent)</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🎮</span>
+                    <div><strong>Control Unit</strong></div>
+                    <div>Directs everything<br>Like a traffic controller 🚦</div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🧮 ALU (Arithmetic Logic Unit)</h3>
+                <div class="simple-text">
+                    This is where computer is <strong>SMART</strong>! 🧠<br>
+                    It can:<br>
+                    ➕ Add numbers<br>
+                    ➖ Subtract numbers<br>
+                    ✖️ Multiply (by adding many times!)<br>
+                    ➗ Divide numbers<br>
+                    ⚖️ Compare numbers (bigger? smaller? equal?)
+                </div>
+                <div class="formula-box">
+                    Example: 2 × 4 = 2 + 2 + 2 + 2 = 8
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>💾 Memory - Two Types</h3>
+                <div class="comparison-box">
+                    <div class="compare-card type1">
+                        <h4>💭 RAM</h4>
+                        <p><strong>Random Access Memory</strong></p>
+                        <p>⏰ Temporary</p>
+                        <p>👀 Shows what you see on screen</p>
+                        <p>🔄 Changes all the time</p>
+                        <p>❌ Lost when computer turns off</p>
+                    </div>
+                    <div class="compare-card type2">
+                        <h4>📜 ROM</h4>
+                        <p><strong>Read Only Memory</strong></p>
+                        <p>🔒 Permanent</p>
+                        <p>🏭 Made by manufacturer</p>
+                        <p>🚀 Controls startup, shutdown</p>
+                        <p>✅ Never changes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎮 Control Unit</h3>
+                <div class="simple-text">
+                    Like a <strong>traffic controller</strong>! 🚦<br>
+                    Tells information where to go:<br>
+                    → To ALU for calculations<br>
+                    → To memory for storage<br>
+                    → To printer for printing<br>
+                    → To screen for display
+                </div>
+            </div>
+        </section>
+
+        <!-- Storage -->
+        <section id="storage" class="section">
+            <h2>💾 Storage Devices</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: Storage = Where computer keeps data | Primary (inside) | Secondary (outside)
+            </div>
+
+            <div class="comparison-box">
+                <div class="compare-card type1">
+                    <h4>💾 Primary Storage</h4>
+                    <p><strong>Inside computer</strong></p>
+                    <p>❌ Not portable</p>
+                    <p>👁️ Can't see it</p>
+                    <p>⚡ Very fast</p>
+                    <p>Example: Hard drive inside</p>
+                </div>
+                <div class="compare-card type2">
+                    <h4>💿 Secondary Storage</h4>
+                    <p><strong>Outside computer</strong></p>
+                    <p>✅ Portable</p>
+                    <p>👁️ Can see it</p>
+                    <p>💾 Keeps data safe</p>
+                    <p>Example: USB, CD, DVD</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📏 How Computer Stores Data</h3>
+                <div class="simple-text">
+                    Computer uses <strong>BITS</strong> and <strong>BYTES</strong>! 📊
+                </div>
+
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">🔘</span>
+                        <div><strong>BIT</strong></div>
+                        <div>0 or 1<br>OFF or ON<br>Like light switch 💡</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🔢</span>
+                        <div><strong>BYTE</strong></div>
+                        <div>8 bits = 1 byte<br>1 character</div>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    8 bits = 1 byte
+                </div>
+
+                <table class="table-visual">
+                    <tr>
+                        <th>Unit</th>
+                        <th>Size</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>📝 Byte</td>
+                        <td>8 bits</td>
+                        <td>1 letter (A)</td>
+                    </tr>
+                    <tr>
+                        <td>📄 KB (Kilobyte)</td>
+                        <td>1024 bytes</td>
+                        <td>1 page of text</td>
+                    </tr>
+                    <tr>
+                        <td>📚 MB (Megabyte)</td>
+                        <td>1024 KB</td>
+                        <td>1 song</td>
+                    </tr>
+                    <tr>
+                        <td>💿 GB (Gigabyte)</td>
+                        <td>1024 MB</td>
+                        <td>1 movie</td>
+                    </tr>
+                    <tr>
+                        <td>🗄️ TB (Terabyte)</td>
+                        <td>1024 GB</td>
+                        <td>1000 movies!</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                💡 <strong>Memory Trick:</strong><br>
+                Bit = Smallest piece (0 or 1) 🔘<br>
+                Byte = 8 bits = 1 character 🔢<br>
+                KB → MB → GB → TB (each × 1024) 📈
+            </div>
+        </section>
+
+        <!-- Software -->
+        <section id="software" class="section">
+            <h2>📱 Software</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: Software = Programs | System Software (OS) | Application Software (Apps)
+            </div>
+
+            <div class="simple-text">
+                Software = <strong>Programs</strong> that tell computer what to do! 📱<br>
+                Without software, computer is useless! ❌
+            </div>
+
+            <div class="comparison-box">
+                <div class="compare-card type1">
+                    <h4>⚙️ System Software</h4>
+                    <p><strong>Makes computer work</strong></p>
+                    <p>🖥️ Operating System</p>
+                    <p>🔧 Controls hardware</p>
+                    <p>🚀 Starts computer</p>
+                    <p>Example: Windows, Mac, Linux</p>
+                </div>
+                <div class="compare-card type2">
+                    <h4>📱 Application Software</h4>
+                    <p><strong>Programs for users</strong></p>
+                    <p>📝 Word Processor</p>
+                    <p>📊 Spreadsheet</p>
+                    <p>🎨 Games, Apps</p>
+                    <p>Example: MS Office, Chrome</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🖥️ Operating System (OS)</h3>
+                <div class="simple-text">
+                    OS = <strong>Boss</strong> of computer! 👑<br>
+                    Coordinates all hardware devices! ⚙️
+                </div>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">🪟</span>
+                        <div><strong>Windows</strong></div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🍎</span>
+                        <div><strong>Mac OS</strong></div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🐧</span>
+                        <div><strong>Linux</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📱 Application Software Types</h3>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">📝</span>
+                        <div><strong>Word Processor</strong></div>
+                        <div>MS Word<br>Write documents</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">📊</span>
+                        <div><strong>Spreadsheet</strong></div>
+                        <div>MS Excel<br>Make tables</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">📧</span>
+                        <div><strong>Email</strong></div>
+                        <div>Gmail, Outlook<br>Send messages</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🎨</span>
+                        <div><strong>Presentation</strong></div>
+                        <div>PowerPoint<br>Make slides</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🌐</span>
+                        <div><strong>Web Browser</strong></div>
+                        <div>Chrome, Safari<br>Browse internet</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🗄️</span>
+                        <div><strong>Database</strong></div>
+                        <div>MS Access<br>Store data</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IT -->
+        <section id="it" class="section">
+            <h2>🌐 Information Technology (IT)</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: IT = Technology that produces, stores, communicates information | Computer Tech + Communication Tech
+            </div>
+
+            <div class="big-emoji">🌐</div>
+
+            <div class="simple-text">
+                IT = <strong>Information Technology</strong> 🌐<br>
+                Technology that helps:<br>
+                📝 Produce information<br>
+                💾 Store information<br>
+                📡 Communicate information<br>
+                🌍 Share information
+            </div>
+
+            <div class="comparison-box">
+                <div class="compare-card type1">
+                    <h4>💻 Computer Technology</h4>
+                    <p><strong>Programmable machine</strong></p>
+                    <p>Takes data (raw facts)</p>
+                    <p>Processes it</p>
+                    <p>Gives information</p>
+                </div>
+                <div class="compare-card type2">
+                    <h4>📡 Communication Technology</h4>
+                    <p><strong>Telecommunications</strong></p>
+                    <p>Electromagnetic devices</p>
+                    <p>Communicate over long distances</p>
+                    <p>Data, sound, video</p>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🌍 Internet, WWW, Cyberspace</h3>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">🌐</span>
+                        <div><strong>Internet</strong></div>
+                        <div>Worldwide network<br>Connects computers<br>Largest network!</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🕸️</span>
+                        <div><strong>World Wide Web</strong></div>
+                        <div>Interconnected computers<br>Multimedia documents<br>Websites</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🌌</span>
+                        <div><strong>Cyberspace</strong></div>
+                        <div>Entire online world<br>Wired + Wireless<br>All communications</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>💼 Impact of Technology</h3>
+                <div class="comparison-box">
+                    <div class="compare-card type1">
+                        <h4>🏢 Workplace</h4>
+                        <ul style="text-align: left;">
+                            <li>✅ Better productivity</li>
+                            <li>✅ More efficient</li>
+                            <li>✅ Lower costs</li>
+                            <li>✅ Better customer service</li>
+                        </ul>
+                    </div>
+                    <div class="compare-card type2">
+                        <h4>🛒 Consumers</h4>
+                        <ul style="text-align: left;">
+                            <li>🛍️ Shop online</li>
+                            <li>📱 Use services</li>
+                            <li>✈️ Plan vacations</li>
+                            <li>🎮 Get entertainment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎓 IT in Different Areas</h3>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="emoji">🎓</span>
+                        <div><strong>Education</strong></div>
+                        <div>Email, Online courses<br>Distance learning</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🏥</span>
+                        <div><strong>Health</strong></div>
+                        <div>Telemedicine<br>Robots</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">💰</span>
+                        <div><strong>Finance</strong></div>
+                        <div>Digital money<br>Online banking</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🎬</span>
+                        <div><strong>Entertainment</strong></div>
+                        <div>Online TV<br>Streaming</div>
+                    </div>
+                    <div class="icon-item">
+                        <span class="emoji">🏛️</span>
+                        <div><strong>Government</strong></div>
+                        <div>Online voting<br>E-services</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                💡 <strong>Pervasive IT:</strong> IT is everywhere! 📱💻🌐<br>
+                Internet, Computers, Cell Phones, Email - all around us! 🌍
+            </div>
+        </section>
+
+        <!-- History -->
+        <section id="history" class="section">
+            <h2>📜 History of Computers</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: 6 Generations = Mechanical → 1st (Vacuum) → 2nd (Transistor) → 3rd (IC) → 4th (Microprocessor) → 5th/6th (AI)
+            </div>
+
+            <div class="timeline-visual">
+                <div class="timeline-item" data-number="🔧">
+                    <h4>Mechanical Era (1623-1900)</h4>
+                    <p><strong>🔢 Abacus (3000 BC):</strong> Wooden beads for math</p>
+                    <p><strong>📐 Napier's Bone (17th Century):</strong> Multiplication calculator</p>
+                    <p><strong>⚙️ Pascaline (17th Century):</strong> First adding machine</p>
+                </div>
+
+                <div class="timeline-item" data-number="1">
+                    <h4>First Generation (1937-1953)</h4>
+                    <p><strong>💡 Vacuum Tubes:</strong> Glass tubes, controlled signals</p>
+                    <p>❌ High power, limited performance</p>
+                    <p>💸 Very expensive</p>
+                    <p>📝 Used punch cards</p>
+                    <p>🔬 For scientific work</p>
+                </div>
+
+                <div class="timeline-item" data-number="2">
+                    <h4>Second Generation (1954-1962)</h4>
+                    <p><strong>🔌 Transistor:</strong> Small device, transfers signals</p>
+                    <p>✅ Lower cost</p>
+                    <p>💾 Magnetic tapes and disks</p>
+                    <p>📝 Languages: FORTRAN, COBOL</p>
+                    <p>⚡ Separate processors</p>
+                </div>
+
+                <div class="timeline-item" data-number="3">
+                    <h4>Third Generation (1963-1972)</h4>
+                    <p><strong>🔬 Integrated Circuits (IC):</strong> Many components on chip</p>
+                    <p>✅ Smaller, faster, cheaper</p>
+                    <p>💾 RAM and ROM</p>
+                    <p>🖥️ Operating Systems</p>
+                    <p>⚡ Multi-programming</p>
+                </div>
+
+                <div class="timeline-item" data-number="4">
+                    <h4>Fourth Generation (1972-1984)</h4>
+                    <p><strong>💻 Microprocessors:</strong> CPU on single chip</p>
+                    <p>💾 Semiconductor memory</p>
+                    <p>🌐 LANs and WANs</p>
+                    <p>📝 Language: C</p>
+                    <p>🖥️ GUI (Graphical Interface)</p>
+                    <p>🍎 Apple and IBM computers</p>
+                </div>
+
+                <div class="timeline-item" data-number="5">
+                    <h4>Fifth Generation (1984-1990)</h4>
+                    <p><strong>🤖 Artificial Intelligence</strong></p>
+                    <p>🧠 Quantum computing</p>
+                    <p>⚡ Parallel processing</p>
+                </div>
+
+                <div class="timeline-item" data-number="6">
+                    <h4>Sixth Generation (1990-Present)</h4>
+                    <p><strong>💻 Intel Pentium:</strong> 55 million transistors!</p>
+                    <p>💾 Up to 1GB RAM, 180GB hard drive</p>
+                    <p>📝 Language: JAVA</p>
+                    <p>🖥️ Windows 95, 98, Linux</p>
+                    <p>🌐 WWW, HTML, HTTP</p>
+                    <p>📱 iPod, YouTube, DVD</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                💡 <strong>Evolution:</strong><br>
+                Big → Small 📉<br>
+                Slow → Fast ⚡<br>
+                Expensive → Cheap 💰<br>
+                Simple → Smart 🧠
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section id="categories" class="section">
+            <h2>🏢 Categories of Computers</h2>
+
+            <div class="memory-box">
+                🧠 MEMORY: 8 Types = PC, Mobile, Mobile Devices, Game Consoles, Servers, Mainframes, Super, Embedded
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="emoji">💻</span>
+                    <div><strong>Personal Computer</strong></div>
+                    <div>PC<br>$500-$5000<br>On desk</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📱</span>
+                    <div><strong>Mobile Computer</strong></div>
+                    <div>Laptop<br>Portable<br>Can carry</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">📲</span>
+                    <div><strong>Mobile Device</strong></div>
+                    <div>Phone, Tablet<br>Small<br>Handheld</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🎮</span>
+                    <div><strong>Game Console</strong></div>
+                    <div>PlayStation<br>Xbox<br>For games</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🖥️</span>
+                    <div><strong>Server</strong></div>
+                    <div>Central computer<br>Holds data<br>Serves clients</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🏢</span>
+                    <div><strong>Mainframe</strong></div>
+                    <div>Big computer<br>$5K-$5M<br>For companies</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🚀</span>
+                    <div><strong>Super Computer</strong></div>
+                    <div>Very powerful<br>Thousands processors<br>Trillions calculations</div>
+                </div>
+                <div class="icon-item">
+                    <span class="emoji">🔌</span>
+                    <div><strong>Embedded</strong></div>
+                    <div>Inside devices<br>Smart appliances<br>Cars</div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📊 Size Comparison</h3>
+                <table class="table-visual">
+                    <tr>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Cost</th>
+                        <th>Use</th>
+                    </tr>
+                    <tr>
+                        <td>💻 PC</td>
+                        <td>Small</td>
+                        <td>$500-$5000</td>
+                        <td>Home, Office</td>
+                    </tr>
+                    <tr>
+                        <td>🏢 Mainframe</td>
+                        <td>Large</td>
+                        <td>$5K-$5M</td>
+                        <td>Big Companies</td>
+                    </tr>
+                    <tr>
+                        <td>🚀 Super Computer</td>
+                        <td>Huge</td>
+                        <td>Very Expensive</td>
+                        <td>Research, Science</td>
+                    </tr>
+                    <tr>
+                        <td>🔌 Embedded</td>
+                        <td>Tiny</td>
+                        <td>Cheap</td>
+                        <td>Appliances, Cars</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="visual-card">
+                <h3>🖥️ Server / Network Server</h3>
+                <div class="simple-text">
+                    Server = <strong>Central computer</strong> 🖥️<br>
+                    Holds data and programs 📦<br>
+                    Serves other computers (clients) 💻<br>
+                    Connected by network 🌐
+                </div>
+                <div class="flowchart">
+                    <div class="flow-box">🖥️ SERVER<br>Central Computer</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">💻 CLIENT 1</div>
+                    <div class="flow-box">💻 CLIENT 2</div>
+                    <div class="flow-box">💻 CLIENT 3</div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>⚙️ Computer Operations</h3>
+                <div class="flowchart">
+                    <div class="flow-box">📥 INPUT<br>Data comes in</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">💾 STORAGE<br>Save it</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">⚙️ PROCESSING<br>Work on it</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">📤 OUTPUT<br>Show result</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-box">📡 COMMUNICATIONS<br>Send it</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        document.getElementById('themeText').textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
