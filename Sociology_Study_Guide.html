@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociology Study Guide - Exam Prep</title>
+    <style>
+        :root {
+            --light-bg: #fafafa;
+            --light-card: #ffffff;
+            --light-text: #262626;
+            --light-text-secondary: #8e8e8e;
+            --light-border: #dbdbdb;
+            --light-accent: #e1306c;
+            --light-accent-2: #833ab4;
+            --light-accent-3: #405de6;
+            
+            --dark-bg: #0a0a0a;
+            --dark-card: #1a1a1a;
+            --dark-text: #f5f5f5;
+            --dark-text-secondary: #a8a8a8;
+            --dark-border: #2f2f2f;
+            --dark-accent: #e1306c;
+            --dark-accent-2: #833ab4;
+            --dark-accent-3: #405de6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--light-bg);
+            color: var(--light-text);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--light-card);
+            border-bottom: 1px solid var(--light-border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .header {
+            background: var(--dark-card);
+            border-bottom-color: var(--dark-border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--light-accent), var(--light-accent-2), var(--light-accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            background: var(--light-border);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 250px;
+            height: calc(100vh - 70px);
+            background: var(--light-card);
+            border-right: 1px solid var(--light-border);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .nav {
+            background: var(--dark-card);
+            border-right-color: var(--dark-border);
+        }
+
+        .nav-item {
+            display: block;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: var(--light-accent);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        body.dark-mode .nav-item {
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .nav-item:hover {
+            background: var(--dark-accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        /* Section */
+        .section {
+            margin: 3rem 0;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--light-accent);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        body.dark-mode .section-header {
+            border-bottom-color: var(--dark-accent);
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--light-card);
+            border: 1px solid var(--light-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--light-accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.dark-mode .card-title {
+            color: var(--dark-accent);
+        }
+
+        .card-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Lists */
+        .list {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .list-item {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: var(--light-bg);
+            border-left: 4px solid var(--light-accent);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .list-item:hover {
+            transform: translateX(10px);
+            background: var(--light-accent);
+            color: white;
+        }
+
+        body.dark-mode .list-item {
+            background: var(--dark-bg);
+            border-left-color: var(--dark-accent);
+        }
+
+        body.dark-mode .list-item:hover {
+            background: var(--dark-accent);
+        }
+
+        /* Visual Elements */
+        .visual-box {
+            background: var(--light-bg);
+            border: 2px dashed var(--light-accent);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 4rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        body.dark-mode .visual-box {
+            background: var(--dark-bg);
+            border-color: var(--dark-accent);
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: var(--light-accent);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            font-weight: 600;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(225, 48, 108, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(225, 48, 108, 0.8); }
+        }
+
+        body.dark-mode .highlight {
+            background: var(--dark-accent);
+        }
+
+        /* Example Box */
+        .example-box {
+            background: var(--light-card);
+            border-left: 5px solid var(--light-accent-3);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        body.dark-mode .example-box {
+            background: var(--dark-card);
+            border-left-color: var(--dark-accent-3);
+        }
+
+        .example-title {
+            font-weight: 700;
+            color: var(--light-accent-3);
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-mode .example-title {
+            color: var(--dark-accent-3);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--light-border);
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--light-accent), var(--light-accent-2), var(--light-accent-3));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        body.dark-mode .progress-bar {
+            background: linear-gradient(90deg, var(--dark-accent), var(--dark-accent-2), var(--dark-accent-3));
+        }
+
+        /* Comparison Table */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .comparison-item:nth-child(1) {
+            background: rgba(225, 48, 108, 0.1);
+            border: 2px solid var(--light-accent);
+        }
+
+        .comparison-item:nth-child(2) {
+            background: rgba(64, 93, 230, 0.1);
+            border: 2px solid var(--light-accent-3);
+        }
+
+        body.dark-mode .comparison-item:nth-child(1) {
+            background: rgba(225, 48, 108, 0.2);
+            border-color: var(--dark-accent);
+        }
+
+        body.dark-mode .comparison-item:nth-child(2) {
+            background: rgba(64, 93, 230, 0.2);
+            border-color: var(--dark-accent-3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        /* Key Terms */
+        .key-term {
+            display: inline-block;
+            background: var(--light-accent-2);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 5px;
+            font-weight: 600;
+            margin: 0 0.2rem;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        body.dark-mode .key-term {
+            background: var(--dark-accent-2);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header class="header">
+        <div class="logo">📚 Sociology Study Guide</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </header>
+
+    <nav class="nav">
+        <a href="#section1" class="nav-item">🏢 Sociology in Business</a>
+        <a href="#section2" class="nav-item">👁️ Sociological Perspective</a>
+        <a href="#section3" class="nav-item">👥 Social Roles & Structure</a>
+        <a href="#section4" class="nav-item">💼 Work & Economy</a>
+    </nav>
+
+    <main class="main-content">
+        <!-- Section 1: Importance of Sociology in Business -->
+        <section id="section1" class="section">
+            <div class="section-header">
+                <span class="section-icon">🏢</span>
+                <span>Importance of Sociology in Business</span>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🎯 What is Sociology?</div>
+                <div class="card-content">
+                    <p>Sociology is the <span class="key-term">study of human relationships and institutions</span>. 
+                    To do well in business, you need more than just math and economics. You need to understand people - 
+                    especially large groups of people. When managers understand sociology, they can better understand 
+                    their employees and customers. Business leaders that understand the importance of studying sociology 
+                    are able to anticipate customer needs and respond to employee problems in ways others cannot.</p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">📚 According to American Sociological Association (ASA):</div>
+                        <p>Sociology "...is the scientific study of society, including patterns of social relationships, 
+                        social interaction, and culture."</p>
+                        <p>The author further states, "...sociologists study all things human, from the interactions between 
+                        two people to the complex relationships between nations or multinational corporations."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">👥 Understanding Employee Demographics</div>
+                <div class="card-content">
+                    <p>Studying sociology can also help you understand the different motivations of different employee 
+                    and applicant demographics. You might notice a marked difference between how men and women approach 
+                    their work or their applications, or you might notice other differences between employee populations, 
+                    like those born outside the country versus those born here or those with college degrees versus 
+                    those without.</p>
+                    
+                    <div class="highlight">
+                        Understanding <strong>why</strong> different employee populations fit certain general behavior 
+                        patterns can help you create a more inclusive workplace that serves all employees' needs.
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-box">
+                🧑‍💼 → 👥 → 💰
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📈 Market Opportunities for Sociologists</div>
+                <div class="card-content">
+                    <p>Sociologists understand that certain phenomena create conditions that influence groups of people. 
+                    For example, if birth rates drop within a country, that country's population will eventually "age" 
+                    and require increased services for the elderly. Those in business with sociology backgrounds can 
+                    identify such factors and the opportunities created within a population.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📢 Public Relations & Sociology</div>
+                <div class="card-content">
+                    <p>The public relations field is one of the professions that illustrates the importance of studying 
+                    sociology. Sociology is fundamental to the public relations department of any major company. A PR 
+                    person's background in sociology tells her that certain actions by the company will affect its 
+                    customers based on their <span class="key-term">cultural and economic backgrounds</span>.</p>
+                    
+                    <div class="example-box">
+                        <div class="example-title">🎓 According to University of Kentucky:</div>
+                        <p>There are lots of paths a Sociology major can take to a fulfilling public relations career.</p>
+                    </div>
+                    
+                    <div class="example-box">
+                        <div class="example-title">💡 Example:</div>
+                        <p>If your company conducts business in another part of the world, your PR person must know 
+                        the history of that area to tailor the message and image of the company. The PR person, for 
+                        instance, would not create a press release that stresses the independent nature of the company 
+                        in a culture that places a large focus on family.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <strong>Definition:</strong> "Public relations is devoted to serving particular interests by 
+                        presenting them to the public in the most favorable light."
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🌍 Culture Matters</div>
+                <div class="card-content">
+                    <p>Culture determines the habits, holidays, behaviors and consumer preferences of every society. 
+                    While implementing a business strategy in a foreign country, you should consider all the cultural 
+                    characteristics of the targeted society.</p>
+                    
+                    <ul class="list">
+                        <li class="list-item">❌ You cannot sell beef in an Indian market, as cows are sacred animals in India</li>
+                        <li class="list-item">❌ You cannot expect a boom in your sales before Thanksgiving elsewhere outside 
+                        of the U.S. because this is only an American holiday</li>
+                        <li class="list-item">✅ Cultural differences may also show up in local levels for small businesses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🎯 4 Main Ways Sociology Helps You in Business</div>
+                <div class="card-content">
+                    <p><strong>The following section covers ways to leverage sociology to grow your business, be it big or small.</strong></p>
+                    
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>👥 Handling Staff</h3>
+                            <p>"Clients do not come first. Employees come first. If you take care of your employees, 
+                            they will take care of the clients."</p>
+                            <p><strong>Coming from a businessman who owns more than 60 companies</strong>, these words 
+                            carry much weight.</p>
+                            <p>Sociology helps you to understand the cultural and social aspects that shape each member 
+                            of your team. With this knowledge, you can avoid alienating staff members or hurting company 
+                            loyalty. Sociology offers you an advantage when dealing with employees in the workplace.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🔍 Identifying Market Opportunities</h3>
+                            <p>Businesses face a lot of competition daily. It is no secret that cutthroat competition can 
+                            put you out of business. It is also no secret that companies that adjust strategy according to 
+                            viable market data overcome challenges and move forward.</p>
+                            <p><strong>But what has that had to do with sociology?</strong></p>
+                            <p>Well, sociology allows you to understand that certain conditions influence groups of people 
+                            differently. For instance, those in business with a background in sociology will easily recognize 
+                            opportunities created within a population even in phenomena such as <strong>war, natural 
+                            calamities or diseases</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>📢 Better Public Relations Management</h3>
+                            <p>"Public relations is devoted to serving particular interests by presenting them to the 
+                            public in the most favorable light."</p>
+                            <p>Going with the above definition, how do you expect to shine in public relations if you 
+                            have no idea how to get through to your target audience? Remember, people's behaviors are 
+                            motivated by several factors, including surroundings, cultural beliefs, religion, etc.</p>
+                            <p>A sociology background will help you to identify the sociological factors that drive your 
+                            customer base. With this information, you can then tune your public relations activities for 
+                            the best results. It goes without saying that your business's actions will affect your customers 
+                            based on their cultural and economic backgrounds.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🧠 Understanding Sociology</h3>
+                            <p>Sociology is <strong>the study of social life, social change, and the social causes and 
+                            consequences of human behavior</strong>.</p>
+                            <p>Sociologists investigate the structure of groups, organizations, and societies, and how 
+                            people interact within these contexts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🔄 Sociology vs Psychology</div>
+                <div class="card-content">
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>📊 Sociology</h3>
+                            <p>Focuses on <span class="key-term">groups of people</span> and their methods of social interaction - 
+                            as families, nations, companies, and so on.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🧠 Psychology</h3>
+                            <p>Concentrates on the <span class="key-term">thoughts and behaviors of individual people</span>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">💡 Why Study Sociology?</div>
+                <div class="card-content">
+                    <p>Studying sociology is important for several reasons, as it provides valuable insights into human 
+                    behavior, societal structures, and the dynamics that shape our lives. Here are some key reasons why 
+                    the study of sociology is important:</p>
+                    
+                    <p><strong>Understanding Society:</strong></p>
+                    <p>Sociology can give you a new perspective on yourself and the world around you. It's called the 
+                    <span class="key-term">sociological perspective</span>.</p>
+                    
+                    <p>By adopting the sociological perspective, you can look beyond commonly held beliefs to determine 
+                    hidden meanings behind human actions.</p>
+                    
+                    <p>The sociological perspective helps us understand that people's behavior is influenced by social 
+                    factors and learned behaviors from those around us.</p>
+                    
+                    <p>The sociological perspective can help us view the world through the eyes of others.</p>
+                    
+                    <div class="highlight">
+                        By developing this perspective, we can begin to use the <span class="key-term">sociological imagination</span>; 
+                        the ability to see a connection between the larger world and one's personal life.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📜 How Did Sociology Develop?</div>
+                <div class="card-content">
+                    <p>Throughout history, scholars have always been interested in the social life and interactions 
+                    of people. Despite this, Sociology did not develop as a field of study until the 1800s.</p>
+                    
+                    <p><strong>Several factors led to its development:</strong></p>
+                    <ul class="list">
+                        <li class="list-item">1️⃣ The rapid political and social changes that took place in Europe as a result 
+                        of the Industrial Revolution</li>
+                        <li class="list-item">2️⃣ The rapid growth of cities and their problems as a result of Industrial Revolution</li>
+                        <li class="list-item">3️⃣ The questioning of traditional beliefs. People across Europe began to question 
+                        traditional roles and expectations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">💼 How is Sociology Important in Business?</div>
+                <div class="card-content">
+                    <p>This entire section demonstrates how sociology provides valuable insights for business success, 
+                    from understanding employees and customers to identifying market opportunities and managing public 
+                    relations effectively.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">💬 Final Words</div>
+                <div class="card-content">
+                    <p>A degree in sociology is not required to be successful in business, and it's unlikely you will 
+                    pursue a sociology degree just to get an edge in business. Still, having someone with a sociology 
+                    background on your team will help you in ways never imagined before.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">❓ Questions (Class Activity)</div>
+                <div class="card-content">
+                    <ul class="list">
+                        <li class="list-item">1. How would you define sociology to someone who knows nothing about it?</li>
+                        <li class="list-item">2. What is the sociological imagination? Illustrate your definition with an example.</li>
+                        <li class="list-item">3. What are the benefits of studying sociology?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📺 Media Analysis</div>
+                <div class="card-content">
+                    <p><strong>Activity:</strong> Analyze media content, including advertisements, movies, or news articles, 
+                    to identify and discuss sociological themes and representations.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🌿 Yarshagumba - The Biological Gold</div>
+                <div class="card-content">
+                    <p><em>Note: This appears to be a case study or example slide from the presentation materials.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Sociological Perspective -->
+        <section id="section2" class="section">
+            <div class="section-header">
+                <span class="section-icon">👁️</span>
+                <span>Sociological Perspective</span>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🎯 Definition</div>
+                <div class="card-content">
+                    <p>The <span class="key-term">sociological perspective</span> is the special way sociologists look at the world. 
+                    It means <strong>seeing the general in the particular and the familiar in the strange</strong> - in other words, 
+                    it's about understanding how society influences people's behaviors, attitudes, and life choices.</p>
+                    
+                    <div class="highlight">
+                        "How do social forces - like culture, class, gender, family, education, religion, and history - 
+                        shape what people do and who they become?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="visual-box">
+                👤 → 👥 → 🌍
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🧠 Sociological Imagination</div>
+                <div class="card-content">
+                    <p>Coined and popularized by sociologist <span class="key-term">C. Wright Mills</span> as the 
+                    <span class="key-term">"sociological imagination."</span></p>
+                    <p>It encourages us to <strong>look beyond personal experiences</strong> and see how our lives are 
+                    shaped by the <strong>social structures and cultural patterns</strong> around us.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🔑 Key Ideas of the Sociological Perspective</div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <strong>1. Society shapes individual choices</strong><br>
+                        Our decisions often reflect social expectations rather than purely personal preferences.<br>
+                        <div class="example-box">
+                            <div class="example-title">Example:</div>
+                            Choosing a career might seem like a personal decision, but it's often influenced by 
+                            family expectations, social class, or gender roles.
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <strong>2. Personal troubles vs. public issues</strong><br>
+                        A problem like unemployment might seem personal, but if many people are jobless, it's a 
+                        <span class="key-term">social issue</span> linked to the economy and policy.<br>
+                        <p>This shift from individual blame to social context is central to sociology.</p>
+                    </div>
+
+                    <div class="list-item">
+                        <strong>3. Seeing the strange in the familiar</strong><br>
+                        Everyday behaviors (like getting married, going to school, or greeting someone) are influenced 
+                        by social norms and cultural traditions.<br>
+                        <div class="example-box">
+                            <div class="example-title">Example:</div>
+                            A wedding is not just a romantic event - it's also a social ritual shaped by religion, 
+                            law, and culture.
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <strong>4. Seeing the general in the particular</strong><br>
+                        Sociologists look for <span class="key-term">patterns of behavior</span> among specific groups.<br>
+                        <div class="example-box">
+                            <div class="example-title">Example:</div>
+                            Teenagers' fashion choices may seem personal, but they reflect group identity and peer influence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">💭 Example in Real Life</div>
+                <div class="card-content">
+                    <p>Imagine two students dropping out of university:</p>
+                    
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>👤 Personal View</h3>
+                            <p>They were lazy or irresponsible.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>👥 Sociological Perspective</h3>
+                            <p>Asks deeper questions:</p>
+                            <ul style="text-align: left; margin-top: 1rem;">
+                                <li>Were tuition fees too high?</li>
+                                <li>Did social class limit their opportunities?</li>
+                                <li>Were they pressured to work instead of study?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        By shifting the focus from the individual to the <span class="key-term">social context</span>, 
+                        we gain a deeper and fairer understanding of human behavior.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🧪 Solomon Asch Conformity Experiment</div>
+                <div class="card-content">
+                    <p><strong>Purpose (1951):</strong> Would people conform to group pressure even when the group is clearly wrong?</p>
+                    
+                    <p>This experiment explored <span class="key-term">social conformity</span> - how and why individuals 
+                    change their behavior or opinions to match those of a group.</p>
+
+                    <div class="visual-box">
+                        👤 → 👥👥👥 → 🤔 → ✅ (Wrong Answer!)
+                    </div>
+
+                    <p><strong>Findings:</strong> About <span class="key-term">75% of participants conformed at least once</span>, 
+                    agreeing with the group even though they knew the answer was wrong.</p>
+
+                    <div class="highlight">
+                        This showed how <strong>social pressure can influence behavior</strong>, even in simple tasks - 
+                        and how people often choose group acceptance over their own judgment.
+                    </div>
+
+                    <p><strong>What it shows:</strong></p>
+                    <ul class="list">
+                        <li class="list-item">✅ Shows how social norms influence behavior</li>
+                        <li class="list-item">✅ Explains peer pressure, workplace groupthink, political opinion, social media influence</li>
+                        <li class="list-item">✅ Highlights how group dynamics can lead to unethical decisions or resistance to change</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📱 Problem-Based Scenario: Pakistan Context</div>
+                <div class="card-content">
+                    <p><strong>Scenario: Social Media and "Bandwagon Effect" During Social Movements</strong></p>
+                    
+                    <p>In recent years, Pakistan has witnessed rising debates on <span class="key-term">gender rights, 
+                    digital activism, and social justice</span>, especially after the #AuratMarch and #MeToo movements.</p>
+
+                    <p>Many young people initially expressed neutral or even supportive views about women's rights. 
+                    However, after seeing strong criticism and backlash on social media - including from friends, 
+                    family, and public figures - they <strong>changed their opinions</strong> publicly, reposting content 
+                    they didn't personally agree with just to "fit in" or avoid social pressure.</p>
+
+                    <div class="example-box">
+                        <div class="example-title">💭 Reflection:</div>
+                        <p>Some even admitted they did not read or understand the issues deeply, but still joined 
+                        the dominant narrative on their timelines.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">❓ Discussion Questions for Class</div>
+                        <ul class="list">
+                            <li class="list-item">1. How does this situation reflect Asch's findings on conformity?</li>
+                            <li class="list-item">2. Do you think social media increases the pressure to conform? Why or why not?</li>
+                            <li class="list-item">3. Is it always negative to conform to group opinions? Can it sometimes have positive social outcomes?</li>
+                            <li class="list-item">4. What factors make people more likely to conform in Pakistani society 
+                            (e.g., culture, religion, family expectations, fear of judgment)?</li>
+                            <li class="list-item">5. How could individuals learn to critically evaluate social issues 
+                            instead of simply following the majority?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📝 SOCIOLOGY WORKSHEET</div>
+                <div class="card-content">
+                    <div class="card">
+                        <div class="card-title">📖 Background Reading</div>
+                        <div class="card-content">
+                            <p>In the 1950s, psychologist <span class="key-term">Solomon Asch</span> conducted a famous 
+                            experiment on conformity. Participants were asked to compare the lengths of lines and give 
+                            their answers aloud in a group. Unknown to one participant, the others were actors instructed 
+                            to give the <span class="key-term">wrong answers intentionally</span>. Surprisingly, about 
+                            <span class="key-term">75% of participants conformed at least once</span>, agreeing with the 
+                            group even though they knew the answer was wrong.</p>
+                            
+                            <p>This showed how <span class="key-term">social pressure can influence behavior</span>, even 
+                            in simple tasks — and how people often choose group acceptance over their own judgment.</p>
+                            
+                            <p>In today's world, <span class="key-term">social media works as a new "group"</span> — 
+                            shaping opinions, influencing beliefs, and pressuring people to conform to popular views. In 
+                            Pakistan, debates on topics such as <span class="key-term">gender rights, cultural traditions, 
+                            or political activism</span> often reflect this phenomenon.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">💭 Scenario: Conformity in a Social Media Debate</div>
+                        <div class="card-content">
+                            <p>A social media campaign supporting the <strong>#AuratMarch</strong> — a women's rights movement 
+                            in Pakistan — is trending. While many users support it, some strongly oppose it, calling it 
+                            "against cultural values." You personally believe the movement is important for gender equality, 
+                            but after reading thousands of negative comments, you <span class="key-term">hesitate to post 
+                            your opinion</span>. You start wondering whether you are wrong — or if staying silent is safer.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">✍️ Student Worksheet (Answer all questions in detail)</div>
+                        <div class="card-content">
+                            <div class="list-item">
+                                <strong>1. How does this situation reflect Asch's findings on conformity?</strong><br>
+                                <em>(Write at least one paragraph explaining the connection between Asch's experiment and 
+                                the social media scenario.)</em>
+                            </div>
+                            
+                            <div class="list-item">
+                                <strong>2. Do you think social media increases the pressure to conform? Why or why not?</strong><br>
+                                <em>(Discuss how online platforms affect social influence. Provide examples from Pakistani 
+                                social media if possible.)</em>
+                            </div>
+                            
+                            <div class="list-item">
+                                <strong>3. Is it always negative to conform to group opinions? Can it sometimes have positive 
+                                social outcomes?</strong><br>
+                                <em>(Analyze both the positive and negative aspects of conformity. Use real-life examples 
+                                to support your answer.)</em>
+                            </div>
+                            
+                            <div class="list-item">
+                                <strong>4. What factors make people more likely to conform in Pakistani society (e.g., culture, 
+                                religion, family expectations, fear of judgment)?</strong><br>
+                                <em>(Reflect on the cultural, social, and emotional influences that shape conformity in Pakistan.)</em>
+                            </div>
+                            
+                            <div class="list-item">
+                                <strong>5. How could individuals learn to critically evaluate social issues instead of simply 
+                                following the majority?</strong><br>
+                                <em>(Suggest practical steps or strategies that can help people think independently and make 
+                                informed decisions.)</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Social Roles, Structure, and Interaction -->
+        <section id="section3" class="section">
+            <div class="section-header">
+                <span class="section-icon">👥</span>
+                <span>Decoding Society: Roles, Structure, and Interaction</span>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">👋 Welcome</div>
+                <div class="card-content">
+                    <p>Welcome to a critical exploration of the fundamental building blocks of human society. This 
+                    presentation will move beyond abstract concepts to examine how social roles, structures, and 
+                    interactions define our everyday lives—especially within the context of Pakistan.</p>
+                    
+                    <p>We will analyze the dynamics that shape individual behavior and collective outcomes, providing 
+                    you with the tools to critically assess the complex social fabric around you.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🏛️ The Foundations</div>
+                <div class="card-content">
+                    <p style="text-align: center; font-weight: 600; margin-bottom: 1.5rem; color: var(--light-accent);">
+                        The Sociological Lens
+                    </p>
+                    
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>🌍 Society</h3>
+                            <p>A large group of people sharing a common culture, territory, and identity, interacting 
+                            within a defined structure.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🎓 Socialization</h3>
+                            <p>The lifelong process through which individuals learn the norms, values, and behaviors 
+                            essential for functioning within their society.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        Understanding these concepts is the first step toward becoming a socio-analyst of your own 
+                        environment, enabling you to see the hidden rules governing behavior.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🎭 The Playbook of Life: Understanding Social Roles</div>
+                <div class="card-content">
+                    <p>Social roles are the expected behaviors, rights, and obligations associated with a particular 
+                    social status (position) within a group or society. <strong>We don't just occupy positions; we perform roles.</strong></p>
+
+                    <div class="visual-box">
+                        👶 → 👨‍🎓 → 👨‍💼 → 👴
+                    </div>
+
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>1️⃣ Ascribed Roles</h3>
+                            <p>Roles assigned at birth or involuntarily later in life.</p>
+                            <p><strong>Examples:</strong> Son, Daughter, Age, Race/Ethnicity</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>2️⃣ Achieved Roles</h3>
+                            <p>Roles that are earned, accomplished, or assumed voluntarily.</p>
+                            <p><strong>Examples:</strong> Student, Doctor, Employee, Friend</p>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">🇵🇰 Pakistan Example:</div>
+                        <p>In Pakistan, being a "Tribal Elder" is an achieved status involving respect and influence, 
+                        whereas being a "Brother" is an ascribed status.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🏗️ The Architectural Framework: Social Structure</div>
+                <div class="card-content">
+                    <p>Social structure refers to the typical patterns of relationships between people. It is the 
+                    framework that organizes society, giving it stability and predictability.</p>
+
+                    <div class="visual-box">
+                        <div style="font-size: 1.5rem;">
+                            🌐 Outer Layer: Institutions and society structures<br>
+                            👥 Second Layer: Groups that connect individuals<br>
+                            🎯 Center Core: Status and Roles
+                        </div>
+                    </div>
+
+                    <ul class="list">
+                        <li class="list-item"><strong>Status and Roles:</strong> Individual positions and expected behaviors 
+                        (e.g., teacher, student)</li>
+                        <li class="list-item"><strong>Groups:</strong> People who interact and share a sense of identity 
+                        (e.g., a family, a classroom)</li>
+                        <li class="list-item"><strong>Social Institutions:</strong> Established sets of norms and beliefs 
+                        that support essential societal needs (e.g., the Economy, Education, Religion, Government)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">⚖️ Application: Analyzing Role Conflict vs. Role Strain</div>
+                <div class="card-content">
+                    <p>To better understand the pressures of social roles, we must distinguish between internal and external tensions:</p>
+
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>😰 Role Strain</h3>
+                            <p>Difficulties that arise when a <strong>single status</strong> imposes conflicting demands or expectations.</p>
+                            <div class="example-box">
+                                <div class="example-title">Example:</div>
+                                <p>A University Student is expected to:</p>
+                                <ul style="text-align: left;">
+                                    <li>Study intensely for exams (Academic Role)</li>
+                                    <li>Be an active member of several student societies (Social Role)</li>
+                                    <li>Hold a part-time job (Economic Role)</li>
+                                </ul>
+                                <p>The conflicting demands of one role (Student) lead to strain.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>⚔️ Role Conflict</h3>
+                            <p>Conflict between the roles associated with <strong>two or more different statuses</strong>.</p>
+                            <div class="example-box">
+                                <div class="example-title">Example:</div>
+                                <p>A Working Mother must:</p>
+                                <ul style="text-align: left;">
+                                    <li>Attend an important meeting with her boss (Employee Role)</li>
+                                    <li>Pick up her sick child from school (Parent Role)</li>
+                                </ul>
+                                <p>These two different statuses create conflict.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🇵🇰 Scenario Analysis: Work Diversity and Gender Inclusion in Pakistan</div>
+                <div class="card-content">
+                    <p>We will analyze a problem-based scenario involving a Pakistani professional navigating both 
+                    traditional family expectations and modern workplace demands.</p>
+
+                    <div class="highlight">
+                        <strong>Consider the case:</strong> A young female software engineer, whose traditional role as 
+                        a dutiful daughter-in-law (Ascribed/Family Status) imposes constraints that conflict with her 
+                        achieved professional status (Employee Status). This tension brings the concepts of role conflict 
+                        and strain to life.
+                    </div>
+
+                    <p>This exercise helps us apply sociological theory to real-world issues, particularly those 
+                    related to <span class="key-term">SDG 5: Gender Equality</span>.</p>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🌍 Connecting Theory to Global Goals (CLO1-4)</div>
+                <div class="card-content">
+                    <p>Our analysis of roles and structures is directly relevant to global sustainable development goals, 
+                    specifically those advocating for equity and stability.</p>
+
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>⚖️ SDG 5: Gender Equality</h3>
+                            <p>Challenging restrictive gender roles and addressing role conflict is vital for achieving 
+                            full and effective participation of women and equal opportunities for leadership at all levels 
+                            of decision-making.</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🏛️ SDG 16: Peace, Justice, and Strong Institutions</h3>
+                            <p>When social structures and institutions (like the legal system or the workplace) are fair 
+                            and inclusive, role-related conflicts decrease, leading to more peaceful and just societies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📝 Conclusion - Key Takeaways</div>
+                <div class="card-content">
+                    <ul class="list">
+                        <li class="list-item"><strong>Roles Define Behavior:</strong> Our actions are largely predictable 
+                        based on the statuses we hold—both ascribed and achieved.</li>
+                        <li class="list-item"><strong>Structure Provides Stability:</strong> Social institutions organize 
+                        complex interactions and provide the foundation for daily life.</li>
+                        <li class="list-item"><strong>Conflict is Inevitable:</strong> Role conflict and strain are normal 
+                        sociological phenomena, especially in rapidly modernizing societies like Pakistan.</li>
+                    </ul>
+
+                    <div class="highlight">
+                        By understanding these dynamics, you are better equipped to advocate for social change that 
+                        promotes equality, justice, and stronger institutions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">❓ Final Question</div>
+                <div class="card-content">
+                    <p><strong>How do social roles, structures, and interactions shape individual behavior and influence 
+                    the functioning of society as a whole? Give examples from everyday life to support your answer.</strong></p>
+                </div>
+            </div>
+
+            <div class="card fade-in" style="text-align: center; padding: 3rem;">
+                <div class="card-content" style="font-size: 1.5rem;">
+                    <p>Thank you.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Work and Economy -->
+        <section id="section4" class="section">
+            <div class="section-header">
+                <span class="section-icon">💼</span>
+                <span>Work and Economy</span>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📖 Definitions</div>
+                <div class="card-content">
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>💼 Work</h3>
+                            <p>Any activity people do to produce goods or services.</p>
+                            <p><strong>Examples:</strong> farming, teaching, selling</p>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>🌐 Economy</h3>
+                            <p>The system through which a society organizes the production, distribution, and consumption 
+                            of goods and services.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight">
+                        <strong>In simple words:</strong> Work is what people do; economy is how society manages that 
+                        work and its results.
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">❓ Question:</div>
+                        <p><strong>What is the Role of economy in shaping societies and the Link between work, production, 
+                        and social organization?</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🔄 Transformation of Economic Systems</div>
+                <div class="card-content">
+                    <p>This refers to how economies change over time. Societies move from simple food-gathering economies 
+                    to advanced digital economies. These transformations change how people live, work, and interact.</p>
+
+                    <div class="highlight">
+                        <strong>Shift from simple to complex economies</strong><br>
+                        Technological changes drove transitions. When new tools, machines, or methods were invented, 
+                        they changed how societies functioned.
+                    </div>
+
+                    <p><em>Note: These transformations change how people live, work, and interact.</em></p>
+
+                    <div class="visual-box">
+                        🌾 → 🏭 → 💻
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🌾 Preindustrial Societies</div>
+                        <div class="card-content">
+                            <p>These are societies <strong>before machines and factories existed</strong>.</p>
+                            <ul class="list">
+                                <li class="list-item">Agriculture (farming) was the main work</li>
+                                <li class="list-item">People used manual labor</li>
+                                <li class="list-item">Small villages and limited trade</li>
+                                <li class="list-item">Agrarian economies relying on manual labor</li>
+                                <li class="list-item">Small-scale production; limited surplus</li>
+                                <li class="list-item"><strong>Examples:</strong> Feudal Europe, ancient civilizations, 
+                                Mughal-era South Asia</li>
+                            </ul>
+                            <div class="example-box">
+                                <div class="example-title">💡 Key Point:</div>
+                                <p><strong>Land = Power</strong> - Kings gave land (called fiefs) to nobles. In return, 
+                                nobles provided loyalty and soldiers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🏭 Industrial Societies</div>
+                        <div class="card-content">
+                            <p>These societies developed after the <span class="key-term">Industrial Revolution</span>.</p>
+                            <p><strong>Features:</strong></p>
+                            <ul class="list">
+                                <li class="list-item">Machine-based production</li>
+                                <li class="list-item">Rise of factories, mass production</li>
+                                <li class="list-item">Mass production and factory systems</li>
+                                <li class="list-item">Urbanization (people move to cities)</li>
+                                <li class="list-item">Urbanization and rise of wage labor</li>
+                                <li class="list-item">Wage labor increases</li>
+                                <li class="list-item"><strong>Examples:</strong> Britain, USA in the 19th century</li>
+                            </ul>
+                            <div class="example-box">
+                                <div class="example-title">🇬🇧 Britain's Industrial Revolution:</div>
+                                <p>Britain's Industrial Revolution was a major period of change from <strong>about 1760 to 
+                                1840</strong> when Britain shifted from <strong>manual, home-based production</strong> to 
+                                <strong>machine-based factory production</strong>. It marks the transition from a 
+                                preindustrial society to an industrial society.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">💻 Postindustrial Societies</div>
+                        <div class="card-content">
+                            <p>These are societies <strong>after</strong> industrialization, where services and knowledge 
+                            become more important than factories.</p>
+                            <p><strong>Features:</strong></p>
+                            <ul class="list">
+                                <li class="list-item">Service sector dominates (education, banking, IT, healthcare)</li>
+                                <li class="list-item">Shift to service and knowledge sectors</li>
+                                <li class="list-item">Technology-driven economy</li>
+                                <li class="list-item">Less reliance on manufacturing</li>
+                                <li class="list-item"><strong>Examples:</strong> USA, Japan, Western Europe today</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🌐 Birth of the Information Age</div>
+                        <div class="card-content">
+                            <p>This began in the late 20th century when computers, the internet, and digital technologies 
+                            transformed society.</p>
+                            <p><strong>Key changes:</strong></p>
+                            <ul class="list">
+                                <li class="list-item">Instant global communication</li>
+                                <li class="list-item">Growth of IT industries</li>
+                                <li class="list-item">Automation of work</li>
+                                <li class="list-item">Huge importance of knowledge and data</li>
+                                <li class="list-item">Digital revolution transformed communication</li>
+                                <li class="list-item">Rise of IT industries and automation</li>
+                            </ul>
+                            <div class="example-box">
+                                <div class="example-title">💡 Example:</div>
+                                <p>Silicon Valley's global influence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🌍 Globalization</div>
+                <div class="card-content">
+                    <p>Globalization means the increasing interconnectedness of countries through trade, communication, 
+                    travel, technology, and culture.</p>
+
+                    <div class="highlight">
+                        <strong>Simple definition:</strong> The world becoming more connected and acting like one big marketplace.
+                    </div>
+
+                    <p><strong>Key aspects:</strong></p>
+                    <ul class="list">
+                        <li class="list-item">Increased interconnectedness of economies</li>
+                        <li class="list-item">International trade, migration, and cultural exchange</li>
+                        <li class="list-item">Role of multinational corporations</li>
+                    </ul>
+
+                    <div class="card">
+                        <div class="card-title">✅ Pros of Globalization</div>
+                        <div class="card-content">
+                            <div class="comparison">
+                                <div class="comparison-item">
+                                    <h3>🌎 Developed Countries</h3>
+                                    <ul style="text-align: left;">
+                                        <li>Access to cheaper labor abroad</li>
+                                        <li>Larger global markets</li>
+                                        <li>Faster spread of technology</li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-item">
+                                    <h3>🌏 Developing Countries</h3>
+                                    <ul style="text-align: left;">
+                                        <li>Foreign investment brings jobs</li>
+                                        <li>Access to advanced technology</li>
+                                        <li>More trade opportunities</li>
+                                        <li>Cultural exposure and global integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">❌ Cons of Globalization</div>
+                        <div class="card-content">
+                            <div class="comparison">
+                                <div class="comparison-item">
+                                    <h3>🌎 Developed Countries</h3>
+                                    <ul style="text-align: left;">
+                                        <li>Job loss due to outsourcing</li>
+                                        <li>Greater competition</li>
+                                        <li>Cultural dilution (loss of local traditions)</li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-item">
+                                    <h3>🌏 Developing Countries</h3>
+                                    <ul style="text-align: left;">
+                                        <li>Exploitation of workers/resources</li>
+                                        <li>Cultural erosion</li>
+                                        <li>Economic dependency on developed nations</li>
+                                        <li>Dependence on richer nations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🇵🇰 Impact of Globalization on Pakistan</div>
+                <div class="card-content">
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h3>🎨 Impact of Globalization on Pakistan's Culture</h3>
+                            <ul style="text-align: left;">
+                                <li>Increased Western media influence</li>
+                                <li>Changing youth lifestyles and consumption patterns</li>
+                                <li>Cultural blending and modernity</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h3>💼 Impact of Globalization on Pakistan's Economy</h3>
+                            <ul style="text-align: left;">
+                                <li>Growth in telecom and IT sectors</li>
+                                <li>Increased foreign trade and investment</li>
+                                <li><strong>Challenges:</strong> trade deficit, reliance on imports</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🏛️ Field Visit: Social Organization</div>
+                <div class="card-content">
+                    <p><strong>Purpose:</strong> Understand community development</p>
+                    <ul class="list">
+                        <li class="list-item">Observe programs supporting education, health, or welfare</li>
+                        <li class="list-item">Relate field observations to course concepts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">🎯 CLO 1–3 Alignment</div>
+                <div class="card-content">
+                    <ul class="list">
+                        <li class="list-item"><strong>CLO 1:</strong> Understanding economic transformations</li>
+                        <li class="list-item"><strong>CLO 2:</strong> Analyzing globalization impacts</li>
+                        <li class="list-item"><strong>CLO 3:</strong> Applying sociological concepts through fieldwork</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-title">📝 Practice Questions</div>
+                <div class="card-content">
+                    <div class="example-box">
+                        <div class="example-title">Question 1: Transformation of Economic Systems</div>
+                        <p>A village in Gilgit-Baltistan relies on farming and handmade goods. Recently, a new road 
+                        allowed trucks to bring machinery and transport products to cities.</p>
+                        <p><strong>Question:</strong> Analyze how this village is transitioning from a preindustrial 
+                        to an industrial economic system. Mention at least two features that support your answer.</p>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">Question 2: Industrial to Postindustrial Shift</div>
+                        <p>A textile factory in Faisalabad replaces 60% of its workers with automated stitching machines. 
+                        At the same time, the company opens a customer-service call center and hires IT staff.</p>
+                        <p><strong>Question:</strong> How does this scenario reflect the shift from an industrial to a 
+                        postindustrial economy?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+
+        // Progress Bar
+        function updateProgress() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add animation delay to cards
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
